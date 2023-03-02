@@ -1,0 +1,15 @@
+.profile__user-avatar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  transition: opacity 0.5s ease-in;
+  z-index: 20;
+}
+
+.profile__user-avatar:hover {
+  cursor: pointer;
+  opacity: 0.2;
+}

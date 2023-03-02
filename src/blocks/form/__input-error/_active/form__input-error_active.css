@@ -1,0 +1,7 @@
+.form__input-error_active {
+  visibility: visible;
+  color: #FF0000;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.25;
+}
