@@ -47,3 +47,19 @@ export const authConfig = {
     btnTitle: 'Зарегистрироваться',
   },
 };
+
+export const infoToolTipConfig = {
+  success: {
+    formName: 'login',
+    title: 'Вход',
+    btnTitleSaving: 'Войти...',
+    btnTitle: 'Войти',
+  },
+  
+  fail: {
+    formName: 'register',
+    title: 'Регистрация',
+    btnTitleSaving: 'Зарегистрироваться...',
+    btnTitle: 'Зарегистрироваться',
+  },
+};

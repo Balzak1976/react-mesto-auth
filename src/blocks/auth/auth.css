@@ -4,6 +4,5 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 45px;
   background-color: #000;
 }

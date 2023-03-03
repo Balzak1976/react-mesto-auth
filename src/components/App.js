@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { api } from '../utils/Api';
 import { popupConfig, authConfig } from '../utils/settings';
-import Footer from './Footer';
+// import Login from './auth/Login';
+import Register from './auth/Register';
 import Header from './Header';
-import Login from './auth/Login';
 import Main from './Main';
+import Footer from './Footer';
 import EditAvatarPopup from './popups/EditAvatarPopup';
 import EditProfilePopup from './popups/EditProfilePopup';
 import AddPlacePopup from './popups/AddPlacePopup';
@@ -177,8 +178,8 @@ function App() {
           <Header />
           <div className="wrapper">
             {!loggedIn && (
-              <Login
-                authConfig={authConfig.login}
+              <Register
+                authConfig={authConfig.register}
                 onValidity={enableValidation}
                 buttonSubmitState={btnSubmitState}
                 inputErrors={validationErrors}
