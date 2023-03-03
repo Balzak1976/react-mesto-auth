@@ -1,24 +1,35 @@
-import React from 'react';
+import { useState } from 'react';
 
-function Login() {
-  const inputErrors = { email: false, password: false };
+function Login({
+  authConfig: { formName, title, btnTitleSaving, btnTitle },
+  buttonSubmitState,
+  onValidity,
+  inputErrors,
+}) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onSubmit = e => {
+    e.preventDefault();
+    console.log(e.target);
+  };
 
   return (
     <section className="auth">
-      <h2 className="auth__title">вход</h2>
+      <h2 className="auth__title">{title}</h2>
 
       <form
         className={`form form_type_auth`}
-        name={'login'}
-        // onSubmit={onSubmit}
-        // onChange={onValidity}
+        name={formName}
+        onSubmit={onSubmit}
+        onChange={onValidity}
         noValidate
       >
         <fieldset className="form__container">
           <label className="form__field">
             <input
-              // value={name}
-              // onChange={e => setName(e.target.value)}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
               className="form__input form__input_type_auth"
               placeholder="Email"
               name="email"
@@ -35,13 +46,13 @@ function Login() {
           </label>
           <label className="form__field">
             <input
-              // value={description}
-              // onChange={e => setDescription(e.target.value)}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
               className="form__input form__input_type_auth"
               placeholder="Пароль"
               name="password"
               type="password"
-              minLength="95"
+              minLength="5"
               maxLength="12"
               required
             />
@@ -55,8 +66,15 @@ function Login() {
           </label>
         </fieldset>
 
-        <button className={`form__submit form__submit_type_auth`} name="submit" type="submit">
-          Войти
+        <button
+          className={`form__submit form__submit_type_auth ${
+            buttonSubmitState.disabled && 'form__submit_inactive'
+          }`}
+          name="submit"
+          type="submit"
+          disabled={buttonSubmitState.disabled}
+        >
+          {buttonSubmitState.isSaving ? btnTitleSaving : btnTitle}
         </button>
       </form>
     </section>

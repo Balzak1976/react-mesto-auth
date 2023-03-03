@@ -2,16 +2,16 @@
 import { useEffect, useState } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { api } from '../utils/Api';
-import { popupConfig } from '../utils/settings';
-import Header from './Header';
-import Main from './Main';
-import Login from './Login';
+import { popupConfig, authConfig } from '../utils/settings';
 import Footer from './Footer';
-import EditAvatarPopup from './EditAvatarPopup';
-import EditProfilePopup from './EditProfilePopup';
-import AddPlacePopup from './AddPlacePopup';
-import DeleteCardPopup from './DeleteCardPopup';
-import ImagePopup from './ImagePopup';
+import Header from './Header';
+import Login from './auth/Login';
+import Main from './Main';
+import EditAvatarPopup from './popups/EditAvatarPopup';
+import EditProfilePopup from './popups/EditProfilePopup';
+import AddPlacePopup from './popups/AddPlacePopup';
+import DeleteCardPopup from './popups/DeleteCardPopup';
+import ImagePopup from './popups/ImagePopup';
 // import ProtectedRouteElement from './ProtectedRoute';
 
 function App() {
@@ -172,74 +172,80 @@ function App() {
   // ===========================================================================
   return (
     <div className="root-app">
-
-    <div className="page">
-      <CurrentUserContext.Provider value={currentUser}>
-        <Header />
-        <div className="wrapper">
-          {!loggedIn && <Login />}
-
-          {loggedIn && (
-            <>
-              <Main
-                onEditAvatar={handleEditAvatarClick}
-                onEditProfile={handleEditProfileClick}
-                onAddPlace={handleAddPlaceClick}
-                cards={cards}
-                onCardClick={handleCardClick}
-                onCardLike={handleCardLike}
-                onCardDelete={handleCardDelBtnClick}
-              />
-
-              <EditAvatarPopup
-                popupConfig={popupConfig.avatar}
-                isOpen={isEditAvatarPopupOpen}
-                onClose={closeAllPopups}
-                onUpdateAvatar={handleUpdateAvatar}
+      <div className="page">
+        <CurrentUserContext.Provider value={currentUser}>
+          <Header />
+          <div className="wrapper">
+            {!loggedIn && (
+              <Login
+                authConfig={authConfig.login}
                 onValidity={enableValidation}
                 buttonSubmitState={btnSubmitState}
                 inputErrors={validationErrors}
               />
+            )}
 
-              <EditProfilePopup
-                popupConfig={popupConfig.profile}
-                isOpen={isEditProfilePopupOpen}
-                onClose={closeAllPopups}
-                onUpdateUser={handleUpdateUser}
-                onValidity={enableValidation}
-                buttonSubmitState={btnSubmitState}
-                inputErrors={validationErrors}
-              />
+            {loggedIn && (
+              <>
+                <Main
+                  onEditAvatar={handleEditAvatarClick}
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleAddPlaceClick}
+                  cards={cards}
+                  onCardClick={handleCardClick}
+                  onCardLike={handleCardLike}
+                  onCardDelete={handleCardDelBtnClick}
+                />
 
-              <AddPlacePopup
-                popupConfig={popupConfig.card}
-                isOpen={isAddPlacePopupOpen}
-                onClose={closeAllPopups}
-                onAddPlace={handleAddPlaceSubmit}
-                onValidity={enableValidation}
-                buttonSubmitState={btnSubmitState}
-                inputErrors={validationErrors}
-              />
+                <EditAvatarPopup
+                  popupConfig={popupConfig.avatar}
+                  isOpen={isEditAvatarPopupOpen}
+                  onClose={closeAllPopups}
+                  onUpdateAvatar={handleUpdateAvatar}
+                  onValidity={enableValidation}
+                  buttonSubmitState={btnSubmitState}
+                  inputErrors={validationErrors}
+                />
 
-              <DeleteCardPopup
-                popupConfig={popupConfig.delCard}
-                isOpen={isDelCardPopupOpen}
-                onClose={closeAllPopups}
-                onCardDelete={handleCardDelete}
-                buttonSubmitState={btnSubmitState}
-              />
+                <EditProfilePopup
+                  popupConfig={popupConfig.profile}
+                  isOpen={isEditProfilePopupOpen}
+                  onClose={closeAllPopups}
+                  onUpdateUser={handleUpdateUser}
+                  onValidity={enableValidation}
+                  buttonSubmitState={btnSubmitState}
+                  inputErrors={validationErrors}
+                />
 
-              <ImagePopup
-                card={selectedCard}
-                isOpen={isImagePopupOpen}
-                onClose={closeAllPopups}
-              />
-            </>
-          )}
-        </div>
-        <Footer />
-      </CurrentUserContext.Provider>
-    </div>
+                <AddPlacePopup
+                  popupConfig={popupConfig.card}
+                  isOpen={isAddPlacePopupOpen}
+                  onClose={closeAllPopups}
+                  onAddPlace={handleAddPlaceSubmit}
+                  onValidity={enableValidation}
+                  buttonSubmitState={btnSubmitState}
+                  inputErrors={validationErrors}
+                />
+
+                <DeleteCardPopup
+                  popupConfig={popupConfig.delCard}
+                  isOpen={isDelCardPopupOpen}
+                  onClose={closeAllPopups}
+                  onCardDelete={handleCardDelete}
+                  buttonSubmitState={btnSubmitState}
+                />
+
+                <ImagePopup
+                  card={selectedCard}
+                  isOpen={isImagePopupOpen}
+                  onClose={closeAllPopups}
+                />
+              </>
+            )}
+          </div>
+          <Footer />
+        </CurrentUserContext.Provider>
+      </div>
     </div>
   );
 }

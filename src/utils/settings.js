@@ -4,30 +4,46 @@ export const popupConfig = {
     title: 'Обновить аватар',
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
-    btnUnlock: true
+    btnUnlock: true,
   },
-  
+
   profile: {
     classNameModifier: 'profile',
     title: 'Редактировать профиль',
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
-    btnUnlock: true
+    btnUnlock: true,
   },
-  
+
   card: {
     classNameModifier: 'card',
     title: 'Новое место',
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
-    btnUnlock: true
+    btnUnlock: true,
   },
-  
+
   delCard: {
     classNameModifier: 'del-card',
     title: 'Вы уверены?',
     btnTitleSaving: 'Да...',
     btnTitle: 'Да',
-    btnUnlock:false
+    btnUnlock: false,
+  },
+};
+
+export const authConfig = {
+  login: {
+    formName: 'login',
+    title: 'Вход',
+    btnTitleSaving: 'Войти...',
+    btnTitle: 'Войти',
+  },
+  
+  register: {
+    formName: 'register',
+    title: 'Регистрация',
+    btnTitleSaving: 'Зарегистрироваться...',
+    btnTitle: 'Зарегистрироваться',
   },
 };
