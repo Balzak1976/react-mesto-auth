@@ -1,15 +1,18 @@
+// import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { api } from '../utils/Api';
 import { popupConfig } from '../utils/settings';
-import AddPlacePopup from './AddPlacePopup';
-import DeleteCardPopup from './DeleteCardPopup';
+import Header from './Header';
+import Main from './Main';
+import Login from './Login';
+import Footer from './Footer';
 import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
-import Footer from './Footer';
-import Header from './Header';
+import AddPlacePopup from './AddPlacePopup';
+import DeleteCardPopup from './DeleteCardPopup';
 import ImagePopup from './ImagePopup';
-import Main from './Main';
+// import ProtectedRouteElement from './ProtectedRoute';
 
 function App() {
   // ============================ STATES =======================================
@@ -27,6 +30,7 @@ function App() {
     disabled: true,
   });
   const [validationErrors, setValidationErrors] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
 
   // ============================ POPUPS =======================================
 
@@ -133,6 +137,7 @@ function App() {
   // ======================= Initial Profile, Cards ===========================
 
   useEffect(() => {
+    setLoggedIn(false);
     api
       .createQueueFetch()
       .then(([dataUser, dataCards]) => {
@@ -165,70 +170,76 @@ function App() {
   }, [isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpen]);
 
   // ===========================================================================
-
   return (
     <div className="root-app">
-      <div className="page">
-        <CurrentUserContext.Provider value={currentUser}>
-          <Header />
 
-          <Main
-            onEditAvatar={handleEditAvatarClick}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            cards={cards}
-            onCardClick={handleCardClick}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelBtnClick}
-          />
+    <div className="page">
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header />
+        <div className="wrapper">
+          {!loggedIn && <Login />}
 
-          <Footer />
+          {loggedIn && (
+            <>
+              <Main
+                onEditAvatar={handleEditAvatarClick}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                cards={cards}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDelBtnClick}
+              />
 
-          <EditAvatarPopup
-            popupConfig={popupConfig.avatar}
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}
-            onValidity={enableValidation}
-            buttonSubmitState={btnSubmitState}
-            inputErrors={validationErrors}
-          />
+              <EditAvatarPopup
+                popupConfig={popupConfig.avatar}
+                isOpen={isEditAvatarPopupOpen}
+                onClose={closeAllPopups}
+                onUpdateAvatar={handleUpdateAvatar}
+                onValidity={enableValidation}
+                buttonSubmitState={btnSubmitState}
+                inputErrors={validationErrors}
+              />
 
-          <EditProfilePopup
-            popupConfig={popupConfig.profile}
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser}
-            onValidity={enableValidation}
-            buttonSubmitState={btnSubmitState}
-            inputErrors={validationErrors}
-          />
+              <EditProfilePopup
+                popupConfig={popupConfig.profile}
+                isOpen={isEditProfilePopupOpen}
+                onClose={closeAllPopups}
+                onUpdateUser={handleUpdateUser}
+                onValidity={enableValidation}
+                buttonSubmitState={btnSubmitState}
+                inputErrors={validationErrors}
+              />
 
-          <AddPlacePopup
-            popupConfig={popupConfig.card}
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            onAddPlace={handleAddPlaceSubmit}
-            onValidity={enableValidation}
-            buttonSubmitState={btnSubmitState}
-            inputErrors={validationErrors}
-          />
+              <AddPlacePopup
+                popupConfig={popupConfig.card}
+                isOpen={isAddPlacePopupOpen}
+                onClose={closeAllPopups}
+                onAddPlace={handleAddPlaceSubmit}
+                onValidity={enableValidation}
+                buttonSubmitState={btnSubmitState}
+                inputErrors={validationErrors}
+              />
 
-          <DeleteCardPopup
-            popupConfig={popupConfig.delCard}
-            isOpen={isDelCardPopupOpen}
-            onClose={closeAllPopups}
-            onCardDelete={handleCardDelete}
-            buttonSubmitState={btnSubmitState}
-          />
+              <DeleteCardPopup
+                popupConfig={popupConfig.delCard}
+                isOpen={isDelCardPopupOpen}
+                onClose={closeAllPopups}
+                onCardDelete={handleCardDelete}
+                buttonSubmitState={btnSubmitState}
+              />
 
-          <ImagePopup
-            card={selectedCard}
-            isOpen={isImagePopupOpen}
-            onClose={closeAllPopups}
-          />
-        </CurrentUserContext.Provider>
-      </div>
+              <ImagePopup
+                card={selectedCard}
+                isOpen={isImagePopupOpen}
+                onClose={closeAllPopups}
+              />
+            </>
+          )}
+        </div>
+        <Footer />
+      </CurrentUserContext.Provider>
+    </div>
     </div>
   );
 }

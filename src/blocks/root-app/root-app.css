@@ -1,5 +1,5 @@
 .root-app {
-  padding: 45px 19px 60px;
+  padding: 0 19px 0;
   box-sizing: border-box;
   background-color: #000;
   font-family: 'Inter', Arial, sans-serif;
@@ -9,9 +9,3 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media screen and (max-width: 400px) {
-  .root-app {
-    padding-top: 28px;
-    padding-bottom: 36px;
-  }
-}
