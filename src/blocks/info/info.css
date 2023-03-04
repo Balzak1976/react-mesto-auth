@@ -1,0 +1,12 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+}
+
+@media screen and (max-width: 550px) {
+  .info {
+    gap: 40px;
+  }
+}

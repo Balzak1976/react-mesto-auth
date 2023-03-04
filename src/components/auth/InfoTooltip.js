@@ -1,18 +1,30 @@
 import React from 'react';
 
-function InfoTooltip({ infoToolTipConfig: { title }, isOpen, onClose }) {
+function InfoTooltip({
+  infoConfig: { success, fail },
+  isInfo,
+  isOpen,
+  onClose,
+}) {
   return (
     <section
-      className={`popup popup_type_info-tool-tip ${isOpen && 'popup_opened'}`}
+      className={`popup  ${isOpen && 'popup_opened'}`}
     >
-      <div className="popup__container">
+      <div className="popup__container popup__container_type_info">
         <button
           className="popup__close"
           onClick={onClose}
           type="button"
           aria-label="закрыть"
         ></button>
-        <h2 className="popup__title">{title}</h2>
+        <div className="info">
+          <div
+            className={`info__img info__img_type_${
+              isInfo ? 'success' : 'fail'
+            }`}
+          ></div>
+          <div className="info__text">{isInfo ? success.text : fail.text}</div>
+        </div>
       </div>
     </section>
   );

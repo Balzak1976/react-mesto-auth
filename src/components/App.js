@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { api } from '../utils/Api';
-import { popupConfig, authConfig } from '../utils/settings';
+import { popupConfig, authConfig, infoConfig } from '../utils/settings';
 // import Login from './auth/Login';
 import Register from './auth/Register';
 import Header from './Header';
@@ -13,6 +13,7 @@ import EditProfilePopup from './popups/EditProfilePopup';
 import AddPlacePopup from './popups/AddPlacePopup';
 import DeleteCardPopup from './popups/DeleteCardPopup';
 import ImagePopup from './popups/ImagePopup';
+import InfoTooltip from './auth/InfoTooltip';
 // import ProtectedRouteElement from './ProtectedRoute';
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
   });
   const [validationErrors, setValidationErrors] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isInfoToolTipOpen, setInfoToolTipOpen] = useState(true);
+  const [isInfo, setInfo] = useState(true);
+  
 
   // ============================ POPUPS =======================================
 
@@ -52,6 +56,7 @@ function App() {
     setAddPlacePopupOpen(false);
     setDelCardPopupOpen({ isOpen: false });
     setImagePopupOpen(false);
+    setInfoToolTipOpen(false);
   };
 
   const handleUpdateAvatar = ({ avatar }) => {
@@ -139,6 +144,7 @@ function App() {
 
   useEffect(() => {
     setLoggedIn(false);
+    setInfo(false);
     api
       .createQueueFetch()
       .then(([dataUser, dataCards]) => {
@@ -184,7 +190,13 @@ function App() {
                 buttonSubmitState={btnSubmitState}
                 inputErrors={validationErrors}
               />
-            )}
+              )}
+            <InfoTooltip
+              infoConfig={infoConfig}
+              isInfo={isInfo}
+              isOpen={isInfoToolTipOpen}
+              onClose={closeAllPopups}
+            />
 
             {loggedIn && (
               <>

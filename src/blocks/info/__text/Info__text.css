@@ -1,0 +1,13 @@
+.info__text {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.21;
+  text-align: center;
+  color: #000;
+}
+
+@media screen and (max-width: 550px) {
+  .info__text {
+    font-size: 20px;
+  }
+}

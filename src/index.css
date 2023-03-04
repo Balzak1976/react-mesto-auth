@@ -41,6 +41,7 @@
 @import url('./blocks/popup/_type_zoom-picture/popup_type_zoom-picture.css');
 @import url('./blocks/popup/__container/popup__container.css');
 @import url('./blocks/popup/__container/_type_zoom-picture/popup__container_type_zoom-picture.css');
+@import url('./blocks/popup/__container/_type_info/popup__container_type_info.css');
 @import url('./blocks/popup/__title/popup__title.css');
 @import url('./blocks/popup/__close/popup__close.css');
 @import url('./blocks/popup/_opened/popup_opened.css');
@@ -67,3 +68,9 @@
 @import url('./blocks/form/__input/_type_auth/form__input_type_auth.css');
 @import url('./blocks/auth/__link/auth__link.css');
 @import url('./blocks/auth/__text/auth__text.css');
+/* info */
+@import url('./blocks/info/info.css');
+@import url('./blocks/info/__img/info__img.css');
+@import url('./blocks/info/__img/_type_success/Info__img_type_success.css');
+@import url('./blocks/info/__img/_type_fail/Info__img_type_fail.css');
+@import url('./blocks/info/__text/Info__text.css');
