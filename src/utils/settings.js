@@ -1,34 +1,34 @@
 export const popupConfig = {
   avatar: {
-    classNameModifier: 'avatar',
+    formName: 'avatar',
     title: 'Обновить аватар',
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
-    btnUnlock: true,
+    btnUnlocker: true,
   },
 
   profile: {
-    classNameModifier: 'profile',
+    formName: 'profile',
     title: 'Редактировать профиль',
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
-    btnUnlock: true,
+    btnUnlocker: true,
   },
 
   card: {
-    classNameModifier: 'card',
+    formName: 'card',
     title: 'Новое место',
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
-    btnUnlock: true,
+    btnUnlocker: true,
   },
 
   delCard: {
-    classNameModifier: 'del-card',
+    formName: 'del-card',
     title: 'Вы уверены?',
     btnTitleSaving: 'Да...',
     btnTitle: 'Да',
-    btnUnlock: false,
+    btnUnlocker: false,
   },
 };
 

@@ -2,11 +2,11 @@ import { useRef, useEffect } from 'react';
 
 function PopupWithForm({
   popupConfig: {
-    classNameModifier,
+    formName,
     title,
     btnTitleSaving,
     btnTitle,
-    btnUnlock,
+    btnUnlocker,
   },
   isOpen,
   onClose,
@@ -24,7 +24,7 @@ function PopupWithForm({
 
   return (
     <section
-      className={`popup popup_type_${classNameModifier} ${
+      className={`popup popup_type_${formName} ${
         isOpen && 'popup_opened'
       }`}
     >
@@ -38,8 +38,8 @@ function PopupWithForm({
         <h2 className="popup__title">{title}</h2>
 
         <form
-          className={`form form_type_${classNameModifier}`}
-          name={classNameModifier}
+          className={`form form_type_${formName}`}
+          name={formName}
           onSubmit={onSubmit}
           onChange={onValidity}
           ref={formRef}
@@ -49,11 +49,11 @@ function PopupWithForm({
 
           <button
             className={`form__submit ${
-            btnUnlock &&  buttonSubmitState.disabled && 'form__submit_inactive'
+            btnUnlocker &&  buttonSubmitState.disabled && 'form__submit_inactive'
             }`}
             name="submit"
             type="submit"
-            disabled={btnUnlock && buttonSubmitState.disabled}
+            disabled={btnUnlocker && buttonSubmitState.disabled}
           >
             {buttonSubmitState.isSaving ? btnTitleSaving : btnTitle}
           </button>
