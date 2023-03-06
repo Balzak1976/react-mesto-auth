@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import * as auth from '../../utils/auth';
 
 function Login({
   authConfig: { formName, title, btnTitleSaving, btnTitle },
@@ -6,12 +8,33 @@ function Login({
   onValidity,
   inputErrors,
 }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const [formValue, setFormValue] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = e => {
+    const { name, value } = e.target;
+
+    setFormValue({ ...formValue, [name]: value });
+  };
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(e.target);
+    if (!formValue.email || !formValue.password){
+      return;
+    }
+    auth.authorize(formValue.email, formValue.password)
+      .then((data) => {
+        if (data.jwt){
+          setFormValue({email: '', password: ''});
+          
+          navigate('/', {replace: true});
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   return (
@@ -28,8 +51,8 @@ function Login({
         <fieldset className="form__container">
           <label className="form__field">
             <input
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              value={formValue.email}
+              onChange={handleChange}
               className="form__input form__input_type_auth"
               placeholder="Email"
               name="email"
@@ -46,8 +69,8 @@ function Login({
           </label>
           <label className="form__field">
             <input
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+              value={formValue.password}
+              onChange={handleChange}
               className="form__input form__input_type_auth"
               placeholder="Пароль"
               name="password"
