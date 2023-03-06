@@ -33,7 +33,7 @@ function App() {
   });
   const [validationErrors, setValidationErrors] = useState({});
   const [isInfoToolTipOpen, setInfoToolTipOpen] = useState(false);
-  const [isInfo, setInfo] = useState(false);
+  const [isSuccess, setSuccess] = useState(true);
 
   // =========================== ROUTING =======================================
 
@@ -146,7 +146,7 @@ function App() {
   // ======================= Initial Profile, Cards ===========================
 
   useEffect(() => {
-    setInfo(true);
+    setSuccess(false);
     api
       .createQueueFetch()
       .then(([dataUser, dataCards]) => {
@@ -201,7 +201,7 @@ function App() {
                   />
                 }
               ></Route>
-              <Route path="/sign-up"
+              <Route path="/sign-in"
                 element={
                   <Login
                     authConfig={authConfig.login}
@@ -211,7 +211,7 @@ function App() {
                   />
                 }
               ></Route>
-              <Route path="/sign-in"
+              <Route path="/sign-up"
                 element={
                   <Register
                     authConfig={authConfig.register}
@@ -272,7 +272,7 @@ function App() {
 
             <InfoTooltip
               infoConfig={infoConfig}
-              isInfo={isInfo}
+              isInfo={isSuccess}
               isOpen={isInfoToolTipOpen}
               onClose={closeAllPopups}
             />

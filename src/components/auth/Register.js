@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import * as auth from '../../utils/auth';
 
 function Register({
   authConfig: { formName, title, btnTitleSaving, btnTitle },
@@ -7,12 +8,25 @@ function Register({
   onValidity,
   inputErrors,
 }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const [formValue, setFormValue] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = e => {
+    const { name, value } = e.target;
+
+    setFormValue({ ...formValue, [name]: value });
+  };
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(e.target);
+    auth.register(formValue.email, formValue.password)
+      .then(() => {
+      navigate('/sign-in', {replace: true});
+    });
   };
 
   return (
@@ -29,8 +43,8 @@ function Register({
         <fieldset className="form__container">
           <label className="form__field">
             <input
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              value={formValue.email}
+              onChange={handleChange}
               className="form__input form__input_type_auth"
               placeholder="Email"
               name="email"
@@ -47,8 +61,8 @@ function Register({
           </label>
           <label className="form__field">
             <input
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+              value={formValue.password}
+              onChange={handleChange}
               className="form__input form__input_type_auth"
               placeholder="Пароль"
               name="password"
