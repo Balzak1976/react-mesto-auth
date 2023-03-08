@@ -1,0 +1,19 @@
+.auth-nav {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: left;
+  gap: 26px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+  text-align: right;
+}
+
+@media screen and (max-width: 400px) {
+  .auth-nav {
+    margin-right: 30px;
+    font-size: 14px;
+  }
+}

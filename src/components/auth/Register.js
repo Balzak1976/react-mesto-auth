@@ -95,7 +95,7 @@ function Register({
 
       <p className="auth__text">
         Уже зарегистрированы?
-        <Link className="auth__link" to="/sign-up">
+        <Link className="auth__link" to="/sign-in">
           Войти
         </Link>
       </p>

@@ -37,7 +37,7 @@ function App() {
 
   // =========================== ROUTING =======================================
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const navigate = useNavigate();
 
   // ============================ POPUPS =======================================
@@ -183,10 +183,13 @@ function App() {
     <div className="root-app">
       <div className="page">
         <CurrentUserContext.Provider value={currentUser}>
-          <Header />
+          <Header
+            loggedIn={loggedIn}
+          />
           <div className="wrapper">
             <Routes>
-              <Route path="/"
+              <Route
+                path="/"
                 element={
                   <ProtectedRouteElement
                     component={Main}
@@ -200,8 +203,9 @@ function App() {
                     onCardDelete={handleCardDelBtnClick}
                   />
                 }
-              ></Route>
-              <Route path="/sign-in"
+              />
+              <Route
+                path="/sign-in"
                 element={
                   <Login
                     authConfig={authConfig.login}
@@ -210,8 +214,9 @@ function App() {
                     inputErrors={validationErrors}
                   />
                 }
-              ></Route>
-              <Route path="/sign-up"
+              />
+              <Route
+                path="/sign-up"
                 element={
                   <Register
                     authConfig={authConfig.register}
@@ -220,7 +225,7 @@ function App() {
                     inputErrors={validationErrors}
                   />
                 }
-              ></Route>
+              />
             </Routes>
           </div>
           <Footer />
