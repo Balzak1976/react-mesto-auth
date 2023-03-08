@@ -10,7 +10,7 @@ function Header({ loggedIn }) {
       <Link to="/">
         <img className="logo header__logo" src={logo} alt="логотип" />
       </Link>
-      <ul className="auth-nav">
+      <nav className="auth-nav">
         <Routes>
           <Route
             path="/"
@@ -21,25 +21,21 @@ function Header({ loggedIn }) {
           <Route
             path="/sign-in"
             element={
-              <li>
-                <Link to="/sign-up" className="auth-nav__link">
-                  Регистрация
-                </Link>
-              </li>
+              <Link to="/sign-up" className="auth-nav__link">
+                Регистрация
+              </Link>
             }
           />
           <Route
             path="/sign-up"
             element={
-              <li>
-                <Link to="/sign-in" className="auth-nav__link">
-                  Войти
-                </Link>
-              </li>
+              <Link to="/sign-in" className="auth-nav__link">
+                Войти
+              </Link>
             }
           />
         </Routes>
-      </ul>
+      </nav>
     </header>
   );
 }

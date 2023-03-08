@@ -10,7 +10,10 @@
 /* auth-nav */
 @import url('./blocks/auth-nav/auth-nav.css');
 @import url('./blocks/auth-nav/__link/auth-nav__link.css');
-@import url('./blocks/auth-nav/__link/_logout/auth-nav__link_logout.css');
+/* logout */
+@import url('./blocks/logout/logout.css');
+@import url('./blocks/logout/__title/logout__title.css');
+@import url('./blocks/logout/__link/logout__link.css');
 /* wrapper */
 @import url('./blocks/wrapper/wrapper.css');
 /* content */

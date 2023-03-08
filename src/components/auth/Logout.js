@@ -1,16 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 function Logout() {
   return (
-    <>
-      <li>email@mail.com</li>
-      <li>
-        <Link to="/sign-in" className="auth-nav__link auth-nav__link_logout">
-          Выйти
-        </Link>
-      </li>
-    </>
+    <div className="logout">
+      <h3 className="logout__title">email@mail.com</h3>
+      <Link to="/sign-in" className="logout__link">
+        Выйти
+      </Link>
+    </div>
   );
 }
 
