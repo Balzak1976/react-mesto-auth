@@ -1,4 +1,13 @@
 .logout__link {
   text-decoration: none;
-  color: #A9A9A9;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+  color: #a9a9a9;
+}
+
+@media screen and (max-width: 450px) {
+  .logout__link {
+    text-align: center;
+  }
 }

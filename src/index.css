@@ -7,9 +7,13 @@
 /* header */
 @import url('./blocks/header/header.css');
 @import url('./blocks/header/__menu/header__menu.css');
+@import url('./blocks/header/__menu/_type_burger/header__menu_type_burger.css');
+@import url('./blocks/header/__logo/header__logo.css');
+@import url('./blocks/header/__logo/_type_burger/header__logo_type_burger.css');
 @import url('./blocks/header/__link/header__link.css');
 /* logout */
 @import url('./blocks/logout/logout.css');
+@import url('./blocks/logout/_type_burger/logout_type_burger.css');
 @import url('./blocks/logout/__title/logout__title.css');
 @import url('./blocks/logout/__link/logout__link.css');
 /* wrapper */
