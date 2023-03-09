@@ -3,3 +3,9 @@
   margin-bottom: 15px;
   gap: 187px;
 }
+
+@media screen and (max-width: 450px) {
+  .form_type_auth {
+    gap: 173px;
+  }
+}

@@ -1,0 +1,16 @@
+.header__menu {
+  flex: 0 1 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+}
+
+@media screen and (max-width: 450px) {
+  .header__menu {
+    margin: 0 30px 0;
+    font-size: 14px;
+  }
+}

@@ -1,13 +1,12 @@
 .header {
+  display: flex;
+  align-items: center;
   width: 100%;
   min-height: 120px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   .header {
     min-height: 85px;
     width: calc(100% + 40px);

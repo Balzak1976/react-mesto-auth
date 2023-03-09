@@ -7,10 +7,10 @@ import ProtectedRouteElement from './ProtectedRoute';
 function Header({ loggedIn }) {
   return (
     <header className="header">
-      <Link to="/">
-        <img className="logo header__logo" src={logo} alt="логотип" />
-      </Link>
-      <nav className="auth-nav">
+      <nav className="header__menu">
+        <Link to="/">
+          <img className="logo" src={logo} alt="логотип" />
+        </Link>
         <Routes>
           <Route
             path="/"
@@ -21,7 +21,7 @@ function Header({ loggedIn }) {
           <Route
             path="/sign-in"
             element={
-              <Link to="/sign-up" className="auth-nav__link">
+              <Link to="/sign-up" className="header__link">
                 Регистрация
               </Link>
             }
@@ -29,7 +29,7 @@ function Header({ loggedIn }) {
           <Route
             path="/sign-up"
             element={
-              <Link to="/sign-in" className="auth-nav__link">
+              <Link to="/sign-in" className="header__link">
                 Войти
               </Link>
             }

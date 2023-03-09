@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   .page {
     padding-bottom: 36px;
   }
