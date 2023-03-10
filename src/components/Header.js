@@ -26,7 +26,7 @@ function Header({ loggedIn }) {
           </Link>
           {loggedIn && (
             <div
-              className="header__btn-burger"
+              className={`header__btn-burger${isMenuOpen ? '_is_close':''}`}
               onClick={handelBtnBurgerClick}
             />
           )}

@@ -4,6 +4,12 @@
   font-size: 18px;
   line-height: 1.22;
   color: #a9a9a9;
+  transition: opacity .5s ease-in;
+}
+
+.logout__link:hover {
+  cursor: pointer;
+  opacity: .6;
 }
 
 @media screen and (max-width: 450px) {
