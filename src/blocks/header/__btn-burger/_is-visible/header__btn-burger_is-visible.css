@@ -1,11 +1,5 @@
-.logout {
-  display: flex;
-  gap: 26px;
-}
-
 @media screen and (max-width: 450px) {
-  .logout {
+  .header__btn-burger_is_visible {
     display: none;
   }
-  
 }

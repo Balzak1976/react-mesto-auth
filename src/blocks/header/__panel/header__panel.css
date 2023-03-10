@@ -1,0 +1,6 @@
+.header__panel {
+  width: calc(100% + 60px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

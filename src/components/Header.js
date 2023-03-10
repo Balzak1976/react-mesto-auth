@@ -5,27 +5,41 @@ import Logout from './auth/Logout';
 import ProtectedRouteElement from './ProtectedRoute';
 
 function Header({ loggedIn }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const handelBtnBurgerClick = () => {
+    setMenuOpen(!isMenuOpen);
+  };
 
   return (
     <header className="header">
-      <nav className={`header__menu ${isOpen && 'header__menu_type_burger'}`}>
-        <div className={`header__logo ${isOpen && 'header__logo_type_burger'}`}>
+      <nav
+        className={`header__menu ${isMenuOpen && 'header__menu_type_burger'}`}
+      >
+        <div
+          className={`header__panel ${
+            isMenuOpen && 'header__panel_type_burger'
+          }`}
+        >
           <Link to="/">
             <img className="logo" src={logo} alt="логотип" />
           </Link>
-          {/* <button
-            className="popup__close"
-            // onClick={onClose}
-            type="button"
-            aria-label="закрыть"
-          ></button> */}
+          {loggedIn && (
+            <div
+              className="header__btn-burger"
+              onClick={handelBtnBurgerClick}
+            />
+          )}
         </div>
         <Routes>
           <Route
             path="/"
             element={
-              <ProtectedRouteElement component={Logout} loggedIn={loggedIn} />
+              <ProtectedRouteElement
+                component={Logout}
+                loggedIn={loggedIn}
+                isOpen={isMenuOpen}
+              />
             }
           />
           <Route
