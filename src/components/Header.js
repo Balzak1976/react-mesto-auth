@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, Route, Routes } from 'react-router-dom';
 import logo from '../images/logo.svg';
-import Logout from './auth/Logout';
+import LogoutMenu from './auth/LogoutMenu';
 import ProtectedRouteElement from './ProtectedRoute';
 
-function Header({ loggedIn, userData }) {
+function Header({ loggedIn, userData, handleLogout }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const handelBtnBurgerClick = () => {
     setMenuOpen(!isMenuOpen);
+  };
+
+  const logout = () => {
+    handleLogout();
+    //закрываем меню, чтобы не ломало верстку
+    setMenuOpen(false);
   };
 
   return (
@@ -26,7 +32,7 @@ function Header({ loggedIn, userData }) {
           </Link>
           {loggedIn && (
             <div
-              className={`header__btn-burger${isMenuOpen ? '_is_close':''}`}
+              className={`header__btn-burger${isMenuOpen ? '_is_close' : ''}`}
               onClick={handelBtnBurgerClick}
             />
           )}
@@ -36,10 +42,11 @@ function Header({ loggedIn, userData }) {
             path="/"
             element={
               <ProtectedRouteElement
-                component={Logout}
+                component={LogoutMenu}
                 loggedIn={loggedIn}
                 isOpen={isMenuOpen}
                 userData={userData}
+                logout={logout}
               />
             }
           />

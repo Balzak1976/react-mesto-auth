@@ -46,6 +46,12 @@ function App() {
     setLoggedIn(true);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('jwt');
+    navigate('/sign-in', { replace: true });
+    setLoggedIn(false);
+  };
+
   const handleTokenCheck = (jwt) => {
     auth.checkToken(jwt).then(({ data }) => {
       if (data) {
@@ -203,7 +209,11 @@ function App() {
     <div className="root-app">
       <div className="page">
         <CurrentUserContext.Provider value={currentUser}>
-          <Header loggedIn={loggedIn} userData={userAuthData} />
+          <Header
+            loggedIn={loggedIn}
+            userData={userAuthData}
+            handleLogout={handleLogout}
+          />
           <div className="wrapper">
             <Routes>
               <Route
