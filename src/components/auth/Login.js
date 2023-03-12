@@ -31,7 +31,7 @@ function Login({
 
     auth.authorize(formValue.email, formValue.password)
       .then(data => {
-        if (data.token) {
+        if (data?.token) {
           setFormValue({ email: '', password: '' });
           handleLogin();
           navigate('/', { replace: true });

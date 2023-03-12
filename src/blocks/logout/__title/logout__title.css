@@ -1,5 +1,9 @@
 .logout__title {
   margin: 0;
+  max-width: 180px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   font-weight: 500;
   font-size: 18px;
   line-height: 1.22;

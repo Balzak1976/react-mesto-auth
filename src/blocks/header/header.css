@@ -1,14 +1,10 @@
 .header {
-  display: flex;
-  align-items: center;
   width: 100%;
-  min-height: 120px;
-  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  border-bottom: 1px solid rgba(84, 84, 84, 1);
 }
 
 @media screen and (max-width: 450px) {
   .header {
-    min-height: 85px;
     width: calc(100% + 40px);
   }
 }
