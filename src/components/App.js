@@ -1,5 +1,5 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { api } from '../utils/Api';
 import { popupConfig, authConfig, infoConfig } from '../utils/settings';
@@ -15,6 +15,7 @@ import DeleteCardPopup from './popups/DeleteCardPopup';
 import ImagePopup from './popups/ImagePopup';
 import InfoTooltip from './auth/InfoTooltip';
 import ProtectedRouteElement from './ProtectedRoute';
+import * as auth from '../utils/auth';
 
 function App() {
   // ============================ STATES =======================================
@@ -35,10 +36,35 @@ function App() {
   const [isInfoToolTipOpen, setInfoToolTipOpen] = useState(false);
   const [isSuccess, setSuccess] = useState(true);
 
-  // =========================== ROUTING =======================================
+  // =========================== AUTH =======================================
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userAuthData, setUserAuthData] = useState({});
   const navigate = useNavigate();
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
+
+  useEffect(() => {
+    handleTokenCheck();
+  }, []);
+
+  const handleTokenCheck = () => {
+    if (localStorage.getItem('jwt')) {
+      const jwt = localStorage.getItem('jwt');
+
+      auth.checkToken(jwt).then(res => {
+        console.log('checkToken', res);
+        // setUserAuthData({ email: res.email });
+
+        if (res) {
+          setLoggedIn(true);
+          navigate('/', { replace: true });
+        }
+      });
+    }
+  };
 
   // ============================ POPUPS =======================================
 
@@ -183,9 +209,7 @@ function App() {
     <div className="root-app">
       <div className="page">
         <CurrentUserContext.Provider value={currentUser}>
-          <Header
-            loggedIn={loggedIn}
-          />
+          <Header loggedIn={loggedIn} userData={userAuthData} />
           <div className="wrapper">
             <Routes>
               <Route
@@ -212,6 +236,7 @@ function App() {
                     onValidity={enableValidation}
                     buttonSubmitState={btnSubmitState}
                     inputErrors={validationErrors}
+                    handleLogin={handleLogin}
                   />
                 }
               />

@@ -1,13 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function Logout({isOpen}) {
+function Logout({ isOpen, userData }) {
+  const navigate = useNavigate();
+
+  const signOut = () => {
+    localStorage.removeItem('jwt');
+    navigate('/sign-in', { replace: true });
+  };
+
   return (
     <div className={`logout ${isOpen && 'logout_type_burger'}`}>
-      <h3 className="logout__title">email@mail.com</h3>
-      <Link to="/sign-in" className="logout__link">
+      <h3 className="logout__title">{userData.email }email@mail.com</h3>
+      <div className="logout__link" onClick={signOut}>
         Выйти
-      </Link>
+      </div>
     </div>
   );
 }

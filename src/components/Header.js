@@ -4,7 +4,7 @@ import logo from '../images/logo.svg';
 import Logout from './auth/Logout';
 import ProtectedRouteElement from './ProtectedRoute';
 
-function Header({ loggedIn }) {
+function Header({ loggedIn, userData }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const handelBtnBurgerClick = () => {
@@ -39,6 +39,7 @@ function Header({ loggedIn }) {
                 component={Logout}
                 loggedIn={loggedIn}
                 isOpen={isMenuOpen}
+                userData={userData}
               />
             }
           />

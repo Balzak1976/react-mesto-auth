@@ -31,10 +31,8 @@ export const authorize = (email, password) => {
   })
     .then(response => response.json())
     .then(data => {
-      console.log('data: ', data);
-      debugger
-      if (data.user) {
-        localStorage.setItem('jwt', data.jwt);
+      if (data.token) {
+        localStorage.setItem('jwt', data.token);
         return data;
       }
     })

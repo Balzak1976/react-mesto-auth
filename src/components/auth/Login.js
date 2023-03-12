@@ -7,6 +7,7 @@ function Login({
   buttonSubmitState,
   onValidity,
   inputErrors,
+  handleLogin,
 }) {
   const navigate = useNavigate();
 
@@ -23,15 +24,16 @@ function Login({
 
   const onSubmit = e => {
     e.preventDefault();
-    if (!formValue.email || !formValue.password){
+    if (!formValue.email || !formValue.password) {
       return;
     }
-    auth.authorize(formValue.email, formValue.password)
-      .then((data) => {
-        if (data.jwt){
-          setFormValue({email: '', password: ''});
-          
-          navigate('/', {replace: true});
+    auth
+      .authorize(formValue.email, formValue.password)
+      .then(data => {
+        if (data.token) {
+          setFormValue({ email: '', password: '' });
+          handleLogin();
+          navigate('/', { replace: true });
         }
       })
       .catch(err => console.log(err));
