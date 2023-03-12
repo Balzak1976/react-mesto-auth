@@ -46,24 +46,14 @@ function App() {
     setLoggedIn(true);
   };
 
-  useEffect(() => {
-    handleTokenCheck();
-  }, []);
-
-  const handleTokenCheck = () => {
-    if (localStorage.getItem('jwt')) {
-      const jwt = localStorage.getItem('jwt');
-
-      auth.checkToken(jwt).then(res => {
-        console.log('checkToken', res);
-        // setUserAuthData({ email: res.email });
-
-        if (res) {
-          setLoggedIn(true);
-          navigate('/', { replace: true });
-        }
-      });
-    }
+  const handleTokenCheck = (jwt) => {
+    auth.checkToken(jwt).then(({ data }) => {
+      if (data) {
+        setUserAuthData({ _id: data._id, email: data.email });
+        setLoggedIn(true);
+        navigate('/', { replace: true });
+      }
+    });
   };
 
   // ============================ POPUPS =======================================
@@ -71,11 +61,11 @@ function App() {
   const handleEditAvatarClick = () => setEditAvatarPopupOpen(true);
   const handleEditProfileClick = () => setEditProfilePopupOpen(true);
   const handleAddPlaceClick = () => setAddPlacePopupOpen(true);
-  const handleCardClick = e => {
+  const handleCardClick = (e) => {
     setSelectedCard({ cardLink: e.target.src, cardTitle: e.target.alt });
     setImagePopupOpen(true);
   };
-  const handleCardDelBtnClick = cardId => {
+  const handleCardDelBtnClick = (cardId) => {
     setDelCardPopupOpen({ isOpen: true, cardId });
   };
 
@@ -89,70 +79,70 @@ function App() {
   };
 
   const handleUpdateAvatar = ({ avatar }) => {
-    setBtnSubmitState(s => ({ ...s, isSaving: true }));
+    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
     api
       .setUserAvatar({ avatar })
-      .then(res => {
+      .then((res) => {
         setCurrentUser(res);
 
         closeAllPopups();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        setBtnSubmitState(s => ({ ...s, isSaving: false }));
+        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
       });
   };
 
   const handleUpdateUser = ({ name, about }) => {
-    setBtnSubmitState(s => ({ ...s, isSaving: true }));
+    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
     api
       .setUserInfo({ name, about })
-      .then(res => {
+      .then((res) => {
         setCurrentUser(res);
 
         closeAllPopups();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        setBtnSubmitState(s => ({ ...s, isSaving: false }));
+        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
       });
   };
 
   const handleAddPlaceSubmit = ({ name, link }) => {
-    setBtnSubmitState(s => ({ ...s, isSaving: true }));
+    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
     api
       .addPlace({ name, link })
-      .then(newCard => {
+      .then((newCard) => {
         setCards([newCard, ...cards]);
 
         closeAllPopups();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        setBtnSubmitState(s => ({ ...s, isSaving: false }));
+        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
       });
   };
 
   const handleCardDelete = ({ cardId }) => {
-    setBtnSubmitState(s => ({ ...s, isSaving: true }));
+    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
     api
       .deleteCard(cardId)
       .then(() => {
-        setCards(state => state.filter(c => c._id !== cardId));
+        setCards((state) => state.filter((c) => c._id !== cardId));
 
         closeAllPopups();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        setBtnSubmitState(s => ({ ...s, isSaving: false }));
+        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
       });
   };
 
@@ -161,10 +151,10 @@ function App() {
   const handleCardLike = ({ cardId, isLiked }) => {
     api
       .changeLikeCardStatus(cardId, isLiked)
-      .then(newCard => {
-        setCards(state => state.map(c => (c._id === cardId ? newCard : c)));
+      .then((newCard) => {
+        setCards((state) => state.map((c) => (c._id === cardId ? newCard : c)));
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -172,36 +162,40 @@ function App() {
   // ======================= Initial Profile, Cards ===========================
 
   useEffect(() => {
-    setSuccess(false);
-    api
-      .createQueueFetch()
-      .then(([dataUser, dataCards]) => {
-        setCurrentUser(dataUser);
-        setCards(dataCards);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
+    if (localStorage.getItem('jwt')) {
+      const jwt = localStorage.getItem('jwt');
+      handleTokenCheck(jwt);
+
+      api
+        .createQueueFetch()
+        .then(([dataUser, dataCards]) => {
+          setCurrentUser(dataUser);
+          setCards(dataCards);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [loggedIn]);
 
   // ================================ VALIDATION ===============================
 
-  const enableValidation = e => {
+  const enableValidation = (e) => {
     if (!e.currentTarget.checkValidity()) {
       setValidationErrors({
         ...validationErrors,
         [e.target.name]: e.target.validationMessage,
       });
-      setBtnSubmitState(s => ({ ...s, disabled: true }));
+      setBtnSubmitState((s) => ({ ...s, disabled: true }));
     } else {
       setValidationErrors({});
-      setBtnSubmitState(s => ({ ...s, disabled: false }));
+      setBtnSubmitState((s) => ({ ...s, disabled: false }));
     }
   };
 
   useEffect(() => {
     setValidationErrors({});
-    setBtnSubmitState(s => ({ ...s, disabled: true }));
+    setBtnSubmitState((s) => ({ ...s, disabled: true }));
   }, [isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpen]);
 
   // ===========================================================================

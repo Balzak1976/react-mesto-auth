@@ -24,11 +24,12 @@ function Login({
 
   const onSubmit = e => {
     e.preventDefault();
+
     if (!formValue.email || !formValue.password) {
       return;
     }
-    auth
-      .authorize(formValue.email, formValue.password)
+
+    auth.authorize(formValue.email, formValue.password)
       .then(data => {
         if (data.token) {
           setFormValue({ email: '', password: '' });
