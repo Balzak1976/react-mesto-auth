@@ -8,7 +8,7 @@ function Register({
   setBtnSubmitState,
   onValidity,
   inputErrors,
-  handleRegister,
+  onRegister,
 }) {
   const navigate = useNavigate();
 
@@ -38,13 +38,13 @@ function Register({
       })
       .then(() => {
         navigate('/sign-in', { replace: true });
-        handleRegister({ isSuccess: true });
+        onRegister({ isSuccess: true });
       })
       .catch((err) => {
         return err.json();
       })
       .then((err) => {
-        handleRegister({
+        onRegister({
           isSuccess: false,
           fail: err?.error,
         });

@@ -36,7 +36,7 @@ function App() {
   const [isInfoToolTipOpen, setInfoToolTipOpen] = useState(false);
   const [infoToolTip, setInfoToolTip] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userAuthData, setUserAuthData] = useState({});
+  const [email, setEmail] = useState({});
 
   // =========================== AUTH =======================================
 
@@ -51,7 +51,7 @@ function App() {
     setLoggedIn(true);
   };
 
-  const handleLogout = () => {
+  const handleSignOut = () => {
     localStorage.removeItem('jwt');
     navigate('/sign-in', { replace: true });
     setLoggedIn(false);
@@ -60,7 +60,7 @@ function App() {
   const handleTokenCheck = (jwt) => {
     auth.checkToken(jwt).then(({ data }) => {
       if (data) {
-        setUserAuthData({ _id: data._id, email: data.email });
+        setEmail({ email: data.email });
         setLoggedIn(true);
         navigate('/', { replace: true });
       }
@@ -216,8 +216,8 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
           <Header
             loggedIn={loggedIn}
-            userData={userAuthData}
-            handleLogout={handleLogout}
+            userData={email}
+            onSignOut={handleSignOut}
           />
           <div className="wrapper">
             <Routes>
@@ -246,7 +246,7 @@ function App() {
                     buttonSubmitState={btnSubmitState}
                     setBtnSubmitState={setBtnSubmitState}
                     inputErrors={validationErrors}
-                    handleLogin={handleLogin}
+                    onLogin={handleLogin}
                   />
                 }
               />
@@ -259,7 +259,7 @@ function App() {
                     buttonSubmitState={btnSubmitState}
                     setBtnSubmitState={setBtnSubmitState}
                     inputErrors={validationErrors}
-                    handleRegister={handleRegister}
+                    onRegister={handleRegister}
                   />
                 }
               />

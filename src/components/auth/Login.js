@@ -8,7 +8,7 @@ function Login({
   setBtnSubmitState,
   onValidity,
   inputErrors,
-  handleLogin,
+  onLogin,
 }) {
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ function Login({
       .then((data) => {
         if (data?.token) {
           setFormValue({ email: '', password: '' });
-          handleLogin();
+          onLogin();
           navigate('/', { replace: true });
         }
       })

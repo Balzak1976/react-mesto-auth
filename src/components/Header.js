@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import logo from '../images/logo.svg';
-import LogoutMenu from './auth/LogoutMenu';
+import SignOut from './auth/SignOut';
 import ProtectedRouteElement from './ProtectedRoute';
 
-function Header({ loggedIn, userData, handleLogout }) {
+function Header({ loggedIn, userData, onSignOut }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const handelBtnBurgerClick = () => {
     setMenuOpen(!isMenuOpen);
   };
 
-  const logout = () => {
-    handleLogout();
+  const handleSignOut = () => {
+    onSignOut();
     //закрываем меню, чтобы не ломало верстку
     setMenuOpen(false);
   };
@@ -42,11 +42,11 @@ function Header({ loggedIn, userData, handleLogout }) {
             path="/"
             element={
               <ProtectedRouteElement
-                component={LogoutMenu}
+                component={SignOut}
                 loggedIn={loggedIn}
                 isOpen={isMenuOpen}
                 userData={userData}
-                logout={logout}
+                onSignOut={handleSignOut}
               />
             }
           />
