@@ -7,6 +7,7 @@ function Register({
   buttonSubmitState,
   onValidity,
   inputErrors,
+  handleRegister,
 }) {
   const navigate = useNavigate();
 
@@ -15,18 +16,36 @@ function Register({
     password: '',
   });
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
 
     setFormValue({ ...formValue, [name]: value });
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     auth.register(formValue.email, formValue.password)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(res);
+      })
       .then(() => {
-      navigate('/sign-in', {replace: true});
-    });
+        navigate('/sign-in', { replace: true });
+        handleRegister({ isSuccess: true });
+      })
+      .catch((err) => {
+        return err.json();
+      })
+      .then((err) => {
+        handleRegister({
+          isSuccess: false,
+          fail: err?.error,
+        });
+        console.log(err);
+      });
   };
 
   return (

@@ -34,13 +34,18 @@ function App() {
   });
   const [validationErrors, setValidationErrors] = useState({});
   const [isInfoToolTipOpen, setInfoToolTipOpen] = useState(false);
-  const [isSuccess, setSuccess] = useState(true);
+  const [infoToolTip, setInfoToolTip] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userAuthData, setUserAuthData] = useState({});
 
   // =========================== AUTH =======================================
 
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [userAuthData, setUserAuthData] = useState({});
   const navigate = useNavigate();
+
+  const handleRegister = (massage) => {
+    setInfoToolTipOpen(true);
+    setInfoToolTip(massage);
+  };
 
   const handleLogin = () => {
     setLoggedIn(true);
@@ -252,6 +257,7 @@ function App() {
                     onValidity={enableValidation}
                     buttonSubmitState={btnSubmitState}
                     inputErrors={validationErrors}
+                    handleRegister={handleRegister}
                   />
                 }
               />
@@ -306,7 +312,7 @@ function App() {
 
             <InfoTooltip
               infoConfig={infoConfig}
-              isInfo={isSuccess}
+              info={infoToolTip}
               isOpen={isInfoToolTipOpen}
               onClose={closeAllPopups}
             />

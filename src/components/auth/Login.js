@@ -16,28 +16,26 @@ function Login({
     password: '',
   });
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
 
     setFormValue({ ...formValue, [name]: value });
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
     if (!formValue.email || !formValue.password) {
       return;
     }
 
-    auth.authorize(formValue.email, formValue.password)
-      .then(data => {
-        if (data?.token) {
-          setFormValue({ email: '', password: '' });
-          handleLogin();
-          navigate('/', { replace: true });
-        }
-      })
-      .catch(err => console.log(err));
+    auth.authorize(formValue.email, formValue.password).then((data) => {
+      if (data?.token) {
+        setFormValue({ email: '', password: '' });
+        handleLogin();
+        navigate('/', { replace: true });
+      }
+    });
   };
 
   return (
