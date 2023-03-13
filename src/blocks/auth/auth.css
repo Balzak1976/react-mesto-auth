@@ -1,8 +1,15 @@
 .auth {
-  padding: 60px 0 0;
+  padding-top: 60px;
   flex: 0 1 358px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   background-color: #000;
+}
+
+@media screen and (max-width: 450px) {
+  .auth {
+    padding: 40px 10px 0;
+    /* margin: 0 10px 0; */
+  }
 }

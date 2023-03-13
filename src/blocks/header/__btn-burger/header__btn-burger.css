@@ -1,6 +1,7 @@
 .header__btn-burger {
   height: 21px;
   width: 24px;
+  box-sizing: border-box;
   position: relative;
   border-top: 3px solid #fff;
   border-bottom: 3px solid #fff;
