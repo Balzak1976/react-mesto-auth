@@ -5,6 +5,7 @@ import * as auth from '../../utils/auth';
 function Register({
   authConfig: { formName, title, btnTitleSaving, btnTitle },
   buttonSubmitState,
+  setBtnSubmitState,
   onValidity,
   inputErrors,
   handleRegister,
@@ -24,6 +25,9 @@ function Register({
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
+
     auth.register(formValue.email, formValue.password)
       .then((res) => {
         if (res.ok) {
@@ -45,6 +49,9 @@ function Register({
           fail: err?.error,
         });
         console.log(err);
+      })
+      .finally(() => {
+        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
       });
   };
 

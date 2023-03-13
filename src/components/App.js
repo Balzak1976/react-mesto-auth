@@ -244,6 +244,7 @@ function App() {
                     authConfig={authConfig.login}
                     onValidity={enableValidation}
                     buttonSubmitState={btnSubmitState}
+                    setBtnSubmitState={setBtnSubmitState}
                     inputErrors={validationErrors}
                     handleLogin={handleLogin}
                   />
@@ -256,6 +257,7 @@ function App() {
                     authConfig={authConfig.register}
                     onValidity={enableValidation}
                     buttonSubmitState={btnSubmitState}
+                    setBtnSubmitState={setBtnSubmitState}
                     inputErrors={validationErrors}
                     handleRegister={handleRegister}
                   />

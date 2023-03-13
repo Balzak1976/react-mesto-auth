@@ -5,6 +5,7 @@ import * as auth from '../../utils/auth';
 function Login({
   authConfig: { formName, title, btnTitleSaving, btnTitle },
   buttonSubmitState,
+  setBtnSubmitState,
   onValidity,
   inputErrors,
   handleLogin,
@@ -29,13 +30,20 @@ function Login({
       return;
     }
 
-    auth.authorize(formValue.email, formValue.password).then((data) => {
-      if (data?.token) {
-        setFormValue({ email: '', password: '' });
-        handleLogin();
-        navigate('/', { replace: true });
-      }
-    });
+    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
+
+    auth.authorize(formValue.email, formValue.password)
+      .then((data) => {
+        if (data?.token) {
+          setFormValue({ email: '', password: '' });
+          handleLogin();
+          navigate('/', { replace: true });
+        }
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
+      });
   };
 
   return (
