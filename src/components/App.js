@@ -81,20 +81,23 @@ function App() {
       });
   };
 
+  const handleTokenCheck = (jwt) => {
+    auth
+      .checkToken(jwt)
+      .then(({ data }) => {
+        if (data) {
+          setEmail({ email: data.email });
+          setLoggedIn(true);
+          navigate('/', { replace: true });
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   const handleSignOut = () => {
     localStorage.removeItem('jwt');
     navigate('/sign-in', { replace: true });
     setLoggedIn(false);
-  };
-
-  const handleTokenCheck = (jwt) => {
-    auth.checkToken(jwt).then(({ data }) => {
-      if (data) {
-        setEmail({ email: data.email });
-        setLoggedIn(true);
-        navigate('/', { replace: true });
-      }
-    });
   };
 
   // ============================ POPUPS =======================================
