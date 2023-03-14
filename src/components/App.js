@@ -47,8 +47,23 @@ function App() {
     setInfoToolTip(massage);
   };
 
-  const handleLogin = () => {
-    setLoggedIn(true);
+  const handleLogin = ({email, password}) => {
+    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
+    
+    return auth.authorize(email, password)
+    .then((data) => {
+      if (data?.token) {
+        localStorage.setItem('jwt', data.token);
+        setLoggedIn(true);
+        navigate('/', { replace: true });
+        // очищаем форму в Login.js
+        return data;
+        }
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
+      });
   };
 
   const handleSignOut = () => {
@@ -244,7 +259,6 @@ function App() {
                     authConfig={authConfig.login}
                     onValidity={enableValidation}
                     buttonSubmitState={btnSubmitState}
-                    setBtnSubmitState={setBtnSubmitState}
                     inputErrors={validationErrors}
                     onLogin={handleLogin}
                   />

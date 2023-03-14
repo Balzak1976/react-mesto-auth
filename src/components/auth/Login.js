@@ -1,17 +1,12 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import * as auth from '../../utils/auth';
 
 function Login({
   authConfig: { formName, title, btnTitleSaving, btnTitle },
-  buttonSubmitState,
-  setBtnSubmitState,
   onValidity,
+  buttonSubmitState,
   inputErrors,
   onLogin,
 }) {
-  const navigate = useNavigate();
-
   const [formValue, setFormValue] = useState({
     email: '',
     password: '',
@@ -30,20 +25,11 @@ function Login({
       return;
     }
 
-    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
-
-    auth.authorize(formValue.email, formValue.password)
-      .then((data) => {
-        if (data?.token) {
-          setFormValue({ email: '', password: '' });
-          onLogin();
-          navigate('/', { replace: true });
-        }
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
-      });
+    onLogin(formValue).then((data) => {
+      if (data?.token) {
+        setFormValue({ email: '', password: '' });
+      }
+    });
   };
 
   return (
