@@ -42,22 +42,37 @@ function App() {
 
   const navigate = useNavigate();
 
-  const handleRegister = (massage) => {
-    setInfoToolTipOpen(true);
-    setInfoToolTip(massage);
+  const handleRegister = ({ email, password }) => {
+    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
+
+    auth
+      .register(email, password)
+      .then(() => {
+        navigate('/sign-in', { replace: true });
+        setInfoToolTip({ isSuccess: true });
+      })
+      .catch((err) => {
+        console.log(err);
+        setInfoToolTip({ isSuccess: false });
+      })
+      .finally(() => {
+        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
+        setInfoToolTipOpen(true);
+      });
   };
 
-  const handleLogin = ({email, password}) => {
+  const handleLogin = ({ email, password }) => {
     setBtnSubmitState((s) => ({ ...s, isSaving: true }));
-    
-    return auth.authorize(email, password)
-    .then((data) => {
-      if (data?.token) {
-        localStorage.setItem('jwt', data.token);
-        setLoggedIn(true);
-        navigate('/', { replace: true });
-        // очищаем форму в Login.js
-        return data;
+
+    return auth
+      .authorize(email, password)
+      .then((data) => {
+        if (data?.token) {
+          localStorage.setItem('jwt', data.token);
+          setLoggedIn(true);
+          navigate('/', { replace: true });
+          // очищаем форму в Login.js
+          return data;
         }
       })
       .catch((err) => console.log(err))
@@ -271,7 +286,6 @@ function App() {
                     authConfig={authConfig.register}
                     onValidity={enableValidation}
                     buttonSubmitState={btnSubmitState}
-                    setBtnSubmitState={setBtnSubmitState}
                     inputErrors={validationErrors}
                     onRegister={handleRegister}
                   />

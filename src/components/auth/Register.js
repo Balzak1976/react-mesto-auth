@@ -1,17 +1,14 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import * as auth from '../../utils/auth';
+import { Link } from 'react-router-dom';
 
 function Register({
   authConfig: { formName, title, btnTitleSaving, btnTitle },
-  buttonSubmitState,
-  setBtnSubmitState,
+
   onValidity,
+  buttonSubmitState,
   inputErrors,
   onRegister,
 }) {
-  const navigate = useNavigate();
-
   const [formValue, setFormValue] = useState({
     email: '',
     password: '',
@@ -26,33 +23,7 @@ function Register({
   const onSubmit = (e) => {
     e.preventDefault();
 
-    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
-
-    auth.register(formValue.email, formValue.password)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(res);
-      })
-      .then(() => {
-        navigate('/sign-in', { replace: true });
-        onRegister({ isSuccess: true });
-      })
-      .catch((err) => {
-        return err.json();
-      })
-      .then((err) => {
-        onRegister({
-          isSuccess: false,
-          fail: err?.error,
-        });
-        console.log(err);
-      })
-      .finally(() => {
-        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
-      });
+    onRegister(formValue);
   };
 
   return (
