@@ -206,8 +206,8 @@ function App() {
   // ======================= Initial Profile, Cards ===========================
 
   useEffect(() => {
-    if (localStorage.getItem('jwt')) {
-      const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
       handleTokenCheck(jwt);
 
       api
