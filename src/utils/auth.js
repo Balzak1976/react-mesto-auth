@@ -21,12 +21,10 @@ function request(url, { token, ...options }) {
       Authorization: token ? `Bearer ${token}` : null,
     },
     body: !token ? JSON.stringify(options) : null,
-  }).then(checkResponse);
-}
-
-function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Ошибка: ${res.status}`);
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
 }

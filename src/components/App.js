@@ -297,8 +297,7 @@ function App() {
             </Routes>
           </div>
           <Footer />
-          {/* popups */}
-          <>
+          
             <EditAvatarPopup
               popupConfig={popupConfig.avatar}
               isOpen={isEditAvatarPopupOpen}
@@ -349,7 +348,7 @@ function App() {
               isOpen={isInfoToolTipOpen}
               onClose={closeAllPopups}
             />
-          </>
+          
         </CurrentUserContext.Provider>
       </div>
     </div>
