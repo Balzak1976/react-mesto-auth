@@ -1,6 +1,6 @@
 export const popupConfig = {
   avatar: {
-    formName: 'avatar',
+    name: 'avatar',
     title: 'Обновить аватар',
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
@@ -8,7 +8,7 @@ export const popupConfig = {
   },
 
   profile: {
-    formName: 'profile',
+    name: 'profile',
     title: 'Редактировать профиль',
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
@@ -16,7 +16,7 @@ export const popupConfig = {
   },
 
   card: {
-    formName: 'card',
+    name: 'card',
     title: 'Новое место',
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
@@ -24,24 +24,28 @@ export const popupConfig = {
   },
 
   delCard: {
-    formName: 'del-card',
+    name: 'del-card',
     title: 'Вы уверены?',
     btnTitleSaving: 'Да...',
     btnTitle: 'Да',
     btnUnlocker: false,
   },
+
+  image: {
+    name: 'zoom-picture',
+  },
 };
 
 export const authConfig = {
   login: {
-    formName: 'login',
+    name: 'login',
     title: 'Вход',
     btnTitleSaving: 'Войти...',
     btnTitle: 'Войти',
   },
-  
+
   register: {
-    formName: 'register',
+    name: 'register',
     title: 'Регистрация',
     btnTitleSaving: 'Зарегистрироваться...',
     btnTitle: 'Зарегистрироваться',
@@ -49,10 +53,11 @@ export const authConfig = {
 };
 
 export const infoConfig = {
+  name: 'info',
   success: {
     text: 'Вы успешно зарегистрировались!',
   },
-  
+
   fail: {
     text: 'Что-то пошло не так! Попробуйте ещё раз.',
   },

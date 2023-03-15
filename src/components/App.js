@@ -337,6 +337,7 @@ function App() {
             />
 
             <ImagePopup
+              popupConfig={popupConfig.image}
               card={selectedCard}
               isOpen={isImagePopupOpen}
               onClose={closeAllPopups}
