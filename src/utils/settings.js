@@ -8,6 +8,7 @@ export const popupConfig = {
     inputs: [
       {
         id: 1,
+        type: null,
         name: 'avatar',
         placeholder: 'Ссылка на картинку',
         typeAttribute: 'url',
@@ -26,6 +27,7 @@ export const popupConfig = {
     inputs: [
       {
         id: 1,
+        type: null,
         name: 'name',
         placeholder: 'Имя',
         typeAttribute: 'text',
@@ -35,6 +37,7 @@ export const popupConfig = {
 
       {
         id: 2,
+        type: null,
         name: 'about',
         placeholder: 'О себе',
         typeAttribute: 'text',
@@ -53,6 +56,7 @@ export const popupConfig = {
     inputs: [
       {
         id: 1,
+        type: null,
         name: 'name',
         placeholder: 'Название',
         typeAttribute: 'text',
@@ -62,6 +66,7 @@ export const popupConfig = {
 
       {
         id: 2,
+        type: null,
         name: 'link',
         placeholder: 'Ссылка на картинку',
         typeAttribute: 'url',

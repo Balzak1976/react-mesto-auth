@@ -1,8 +1,9 @@
 import { useContext, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import useForm from '../../hooks/useForm';
+// import useForm from '../../hooks/useForm';
 import PopupWithForm from './PopupWithForm';
 import Input from '../parts/Input';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 function EditProfilePopup({
   popupConfig,
@@ -15,11 +16,24 @@ function EditProfilePopup({
 }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const { values, handleChange, setValues } = useForm({});
+  const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation();
   
   const handleSubmit = (e) => {
     e.preventDefault();
     onUpdateUser(values);
+  };
+
+  const enableValidation = () => {
+    if (isValid) {
+      setValidationErrors({
+        ...validationErrors,
+        [e.target.name]: e.target.validationMessage,
+      });
+      setBtnSubmitState((s) => ({ ...s, disabled: true }));
+    } else {
+      setValidationErrors({});
+      setBtnSubmitState((s) => ({ ...s, disabled: false }));
+    }
   };
   
   useEffect(() => {
@@ -42,7 +56,7 @@ function EditProfilePopup({
             inputConfig={input}
             value={values[input.name]}
             onChange={handleChange}
-            inputError={inputErrors[input.name]}
+            inputError={errors[input.name]}
           />
         ))}
       </fieldset>

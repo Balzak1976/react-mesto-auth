@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import React from 'react';
+import useForm from '../../hooks/useForm';
 import Form from '../parts/Form';
+import Input from '../parts/Input';
 
 function Login({
   authConfig,
@@ -8,27 +10,16 @@ function Login({
   inputErrors,
   onLogin,
 }) {
-  const [formValue, setFormValue] = useState({
-    email: '',
-    password: '',
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormValue({ ...formValue, [name]: value });
-  };
+  const { values, handleChange, setValues } = useForm({});
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (!formValue.email || !formValue.password) {
-      return;
-    }
+    if (!values.email || !values.password) return;
 
-    onLogin(formValue).then((data) => {
+    onLogin(values).then((data) => {
       if (data?.token) {
-        setFormValue({ email: '', password: '' });
+        setValues({ email: '', password: '' });
       }
     });
   };
@@ -37,55 +28,24 @@ function Login({
     <section className="auth">
       <h2 className="auth__title">{authConfig.title}</h2>
 
-      <Form formConfig={authConfig}
-            onSubmit={onSubmit}
-            buttonSubmitState={buttonSubmitState}
-            onValidity={onValidity}
+      <Form
+        formConfig={authConfig}
+        onSubmit={onSubmit}
+        buttonSubmitState={buttonSubmitState}
+        onValidity={onValidity}
       >
         <fieldset className="form__container">
-          <label className="form__field">
-            <input
-              value={formValue.email}
+          {authConfig.inputs.map(({ id, ...input }) => (
+            <Input
+              key={id}
+              inputConfig={input}
+              value={values[input.name]}
               onChange={handleChange}
-              className="form__input form__input_type_auth"
-              placeholder="Email"
-              name="email"
-              type="email"
-              required
+              inputError={inputErrors[input.name]}
             />
-            <span
-              className={`form__input-error ${
-                inputErrors?.email && 'form__input-error_active'
-              }`}
-            >
-              {inputErrors?.email}
-            </span>
-          </label>
-          <label className="form__field">
-            <input
-              value={formValue.password}
-              onChange={handleChange}
-              className="form__input form__input_type_auth"
-              placeholder="Пароль"
-              name="password"
-              type="password"
-              minLength="5"
-              maxLength="12"
-              required
-            />
-            <span
-              className={`form__input-error ${
-                inputErrors?.password && 'form__input-error_active'
-              }`}
-            >
-              {inputErrors?.password}
-            </span>
-          </label>
+          ))}
         </fieldset>
-
       </Form>
-
-      
     </section>
   );
 }
