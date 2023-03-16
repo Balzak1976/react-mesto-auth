@@ -1,5 +1,7 @@
-import { useRef } from 'react';
+import { useEffect } from 'react';
+import useForm from '../../hooks/useForm';
 import PopupWithForm from './PopupWithForm';
+import Input from '../parts/Input';
 
 function AddPlacePopup({
   popupConfig,
@@ -10,13 +12,16 @@ function AddPlacePopup({
   buttonSubmitState,
   inputErrors,
 }) {
-  const nameRef = useRef();
-  const linkRef = useRef();
+  const { values, handleChange, setValues } = useForm({});
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    onAddPlace({ name: nameRef.current.value, link: linkRef.current.value });
+    onAddPlace(values);
   };
+
+  useEffect(() => {
+    setValues({ name: '', link: '' });
+  }, [isOpen]);
 
   return (
     <PopupWithForm
@@ -28,44 +33,15 @@ function AddPlacePopup({
       onValidity={onValidity}
     >
       <fieldset className="form__container">
-        <label className="form__field">
-          <input
-            ref={nameRef}
-            className="form__input form__input_card_name"
-            id="card-name-input"
-            placeholder="Название"
-            name="name"
-            type="text"
-            minLength="2"
-            maxLength="30"
-            required
+        {popupConfig.inputs.map(({ id, ...input }) => (
+          <Input
+            key={id}
+            inputConfig={input}
+            value={values[input.name]}
+            onChange={handleChange}
+            inputError={inputErrors[input.name]}
           />
-          <span
-            className={`form__input-error ${
-              inputErrors?.name && 'form__input-error_active'
-            }`}
-          >
-            {inputErrors?.name}
-          </span>
-        </label>
-        <label className="form__field">
-          <input
-            ref={linkRef}
-            className="form__input form__input_card_img-link"
-            id="card-img-link-input"
-            placeholder="Ссылка на картинку"
-            name="link"
-            type="url"
-            required
-          />
-          <span
-            className={`form__input-error ${
-              inputErrors?.link && 'form__input-error_active'
-            }`}
-          >
-            {inputErrors?.link}
-          </span>
-        </label>
+        ))}
       </fieldset>
     </PopupWithForm>
   );

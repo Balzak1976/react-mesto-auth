@@ -40,6 +40,25 @@ export const popupConfig = {
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
     btnUnlocker: true,
+    inputs: [
+      {
+        id: 1,
+        name: 'name',
+        placeholder: 'Название',
+        typeAttribute: 'text',
+        minLength: '2',
+        maxLength: '30',
+      },
+
+      {
+        id: 2,
+        name: 'link',
+        placeholder: 'Ссылка на картинку',
+        typeAttribute: 'url',
+        minLength: '2',
+        maxLength: '200',
+      },
+    ],
   },
 
   delCard: {
