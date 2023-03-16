@@ -1,5 +1,7 @@
-import { useRef } from 'react';
+import { useEffect } from 'react';
+import useForm from '../../hooks/useForm';
 import PopupWithForm from './PopupWithForm';
+import Input from '../parts/Input';
 
 function EditAvatarPopup({
   popupConfig,
@@ -10,12 +12,16 @@ function EditAvatarPopup({
   buttonSubmitState,
   inputErrors,
 }) {
-  const avatarRef = useRef();
+  const { values, handleChange, setValues } = useForm({});
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdateAvatar({ avatar: avatarRef.current.value });
+    onUpdateAvatar(values);
   };
+
+  useEffect(() => {
+    setValues({ avatar: '' });
+  }, [isOpen]);
 
   return (
     <PopupWithForm
@@ -27,24 +33,15 @@ function EditAvatarPopup({
       onValidity={onValidity}
     >
       <fieldset className="form__container">
-        <label className="form__field">
-          <input
-            ref={avatarRef}
-            className="form__input form__input_avatar_img-link"
-            id="avatar-img-link-input"
-            placeholder="Ссылка на картинку"
-            name="avatar"
-            type="url"
-            required
+        {popupConfig.inputs.map(({ id, ...input }) => (
+          <Input
+            key={id}
+            inputConfig={input}
+            value={values[input.name]}
+            onChange={handleChange}
+            inputError={inputErrors[input.name]}
           />
-          <span
-            className={`form__input-error ${
-              inputErrors?.avatar && 'form__input-error_active'
-            }`}
-          >
-            {inputErrors?.avatar}
-          </span>
-        </label>
+        ))}
       </fieldset>
     </PopupWithForm>
   );

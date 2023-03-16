@@ -5,6 +5,16 @@ export const popupConfig = {
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
     btnUnlocker: true,
+    inputs: [
+      {
+        id: 1,
+        name: 'avatar',
+        placeholder: 'Ссылка на картинку',
+        typeAttribute: 'url',
+        minLength: '2',
+        maxLength: '200',
+      },
+    ],
   },
 
   profile: {
