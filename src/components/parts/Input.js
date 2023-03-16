@@ -2,13 +2,15 @@ import React from 'react';
 
 function Input({
   inputConfig: { name, placeholder, typeAttribute, minLength, maxLength },
-  inputErrors
+  value,
+  onChange,
+  inputError
 }) {
   return (
     <label className="form__field">
       <input
-        // value={name}
-        // onChange={(e) => setName(e.target.value)}
+        value={value ?? ''}
+        onChange={onChange}
         className={`form__input form__input_type_${name}`}
         placeholder={placeholder}
         name={name}
@@ -19,10 +21,10 @@ function Input({
       />
       <span
         className={`form__input-error ${
-          inputErrors?.name && 'form__input-error_active'
+          inputError && 'form__input-error_active'
         }`}
       >
-        {inputErrors?.name}
+        {inputError}
       </span>
     </label>
   );
