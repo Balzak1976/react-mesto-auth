@@ -13,6 +13,25 @@ export const popupConfig = {
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
     btnUnlocker: true,
+    inputs: [
+      {
+        id: 1,
+        name: 'name',
+        placeholder: 'Имя',
+        typeAttribute: 'text',
+        minLength: '2',
+        maxLength: '40',
+      },
+
+      {
+        id: 2,
+        name: 'about',
+        placeholder: 'О себе',
+        typeAttribute: 'text',
+        minLength: '2',
+        maxLength: '200',
+      },
+    ],
   },
 
   card: {

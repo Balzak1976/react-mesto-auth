@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import PopupWithForm from './PopupWithForm';
+import Input from '../parts/Input';
 
 function EditProfilePopup({
   popupConfig,
@@ -16,7 +17,7 @@ function EditProfilePopup({
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     onUpdateUser({ name, about: description });
   };
@@ -36,12 +37,14 @@ function EditProfilePopup({
       onValidity={onValidity}
     >
       <fieldset className="form__container">
+        {popupConfig.inputs.map(({id, ...input}) => (
+          <Input key={id} inputConfig={input} inputErrors={inputErrors} />
+        ))}
         <label className="form__field">
           <input
             value={name}
-            onChange={e => setName(e.target.value)}
-            className="form__input form__input_user_name"
-            id="user-name-input"
+            onChange={(e) => setName(e.target.value)}
+            className="form__input form__input_type_name"
             placeholder="Имя"
             name="name"
             type="text"
@@ -60,9 +63,8 @@ function EditProfilePopup({
         <label className="form__field">
           <input
             value={description}
-            onChange={e => setDescription(e.target.value)}
-            className="form__input form__input_user_about"
-            id="user-about-input"
+            onChange={(e) => setDescription(e.target.value)}
+            className="form__input form__input_type_about"
             placeholder="О себе"
             name="about"
             type="text"
