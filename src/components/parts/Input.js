@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Input({
-  inputConfig: { name, placeholder, typeAttribute, minLength, maxLength },
+  inputConfig: {type, name, placeholder, typeAttribute, minLength, maxLength },
   value,
   onChange,
   inputError
@@ -11,7 +11,7 @@ function Input({
       <input
         value={value ?? ''}
         onChange={onChange}
-        className={`form__input form__input_type_${name}`}
+        className={`form__input form__input_type_${type}`}
         placeholder={placeholder}
         name={name}
         type={typeAttribute}

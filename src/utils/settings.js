@@ -91,6 +91,25 @@ export const authConfig = {
     btnTitleSaving: 'Войти...',
     btnTitle: 'Войти',
     btnUnlocker: true,
+    inputs: [
+      {
+        id: 1,
+        type: 'auth',
+        name: 'email',
+        placeholder: 'Email',
+        typeAttribute: 'email',
+      },
+
+      {
+        id: 2,
+        type: 'auth',
+        name: 'password',
+        placeholder: 'Пароль',
+        typeAttribute: 'password',
+        minLength: '6',
+        maxLength: '12',
+      },
+    ],
   },
 
   register: {
@@ -99,6 +118,25 @@ export const authConfig = {
     btnTitleSaving: 'Зарегистрироваться...',
     btnTitle: 'Зарегистрироваться',
     btnUnlocker: true,
+    inputs: [
+      {
+        id: 1,
+        type: 'auth',
+        name: 'email',
+        placeholder: 'Email',
+        typeAttribute: 'email',
+      },
+
+      {
+        id: 2,
+        type: 'auth',
+        name: 'password',
+        placeholder: 'Пароль',
+        typeAttribute: 'password',
+        minLength: '6',
+        maxLength: '12',
+      },
+    ],
   },
 };
 
