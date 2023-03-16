@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import logo from '../images/logo.svg';
 import SignOut from './auth/SignOut';
-import ProtectedRouteElement from './ProtectedRoute';
+import ProtectedRouteElement from './parts/ProtectedRoute';
 
 function Header({ loggedIn, userData, onSignOut }) {
   const [isMenuOpen, setMenuOpen] = useState(false);

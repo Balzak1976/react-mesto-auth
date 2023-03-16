@@ -1,5 +1,5 @@
 import React from 'react';
-import Popup from './Popup';
+import Popup from '../parts/Popup';
 
 function ImagePopup({ popupConfig: { name }, card: { cardLink, cardTitle }, isOpen, onClose }) {
   return (

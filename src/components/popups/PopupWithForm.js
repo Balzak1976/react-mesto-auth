@@ -1,8 +1,9 @@
 import React from 'react';
-import Popup from './Popup';
+import Form from '../parts/Form';
+import Popup from '../parts/Popup';
 
 function PopupWithForm({
-  popupConfig: { name, title, btnTitleSaving, btnTitle, btnUnlocker },
+  popupConfig,
   isOpen,
   onClose,
   onSubmit,
@@ -11,30 +12,17 @@ function PopupWithForm({
   children,
 }) {
   return (
-    <Popup isOpen={isOpen} onClose={onClose} name={name}>
-      <h2 className="popup__title">{title}</h2>
+    <Popup isOpen={isOpen} onClose={onClose} name={popupConfig.name}>
+      <h2 className="popup__title">{popupConfig.title}</h2>
 
-      <form
-        className={`form form_type_${name}`}
-        name={name}
-        onSubmit={onSubmit}
-        onChange={onValidity}
-        noValidate
+      <Form formConfig={popupConfig}
+            onSubmit={onSubmit}
+            buttonSubmitState={buttonSubmitState}
+            onValidity={onValidity}
       >
         {children}
 
-        <button
-          className={`form__submit ${
-            btnUnlocker && buttonSubmitState.disabled && 'form__submit_inactive'
-          }`}
-          name="submit"
-          type="submit"
-          disabled={btnUnlocker && buttonSubmitState.disabled}
-        >
-          {buttonSubmitState.isSaving ? btnTitleSaving : btnTitle}
-        </button>
-      </form>
-
+      </Form>
     </Popup>
   );
 }

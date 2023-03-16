@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { api } from '../utils/Api';
-import { popupConfig, authConfig, infoConfig } from '../utils/settings';
-import Header from './Header';
-import Main from './Main';
+import * as auth from '../utils/auth';
+import { authConfig, infoConfig, popupConfig } from '../utils/settings';
+import InfoTooltip from './auth/InfoTooltip';
 import Login from './auth/Login';
 import Register from './auth/Register';
 import Footer from './Footer';
-import EditAvatarPopup from './popups/EditAvatarPopup';
-import EditProfilePopup from './popups/EditProfilePopup';
+import Header from './Header';
+import Main from './Main';
+import ProtectedRouteElement from './parts/ProtectedRoute';
 import AddPlacePopup from './popups/AddPlacePopup';
 import DeleteCardPopup from './popups/DeleteCardPopup';
+import EditAvatarPopup from './popups/EditAvatarPopup';
+import EditProfilePopup from './popups/EditProfilePopup';
 import ImagePopup from './popups/ImagePopup';
-import InfoTooltip from './auth/InfoTooltip';
-import ProtectedRouteElement from './ProtectedRoute';
-import * as auth from '../utils/auth';
 
 function App() {
   // ============================ STATES =======================================

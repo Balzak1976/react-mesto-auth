@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Form from '../parts/Form';
 
 function Register({
-  authConfig: { formName, title, btnTitleSaving, btnTitle },
-
+  authConfig,
   onValidity,
   buttonSubmitState,
   inputErrors,
@@ -28,14 +28,12 @@ function Register({
 
   return (
     <section className="auth">
-      <h2 className="auth__title">{title}</h2>
-
-      <form
-        className={`form form_type_auth`}
-        name={formName}
-        onSubmit={onSubmit}
-        onChange={onValidity}
-        noValidate
+      <h2 className="auth__title">{authConfig.title}</h2>
+      
+      <Form formConfig={authConfig}
+            onSubmit={onSubmit}
+            buttonSubmitState={buttonSubmitState}
+            onValidity={onValidity}
       >
         <fieldset className="form__container">
           <label className="form__field">
@@ -77,19 +75,8 @@ function Register({
             </span>
           </label>
         </fieldset>
-
-        <button
-          className={`form__submit form__submit_type_auth ${
-            buttonSubmitState.disabled && 'form__submit_inactive'
-          }`}
-          name="submit"
-          type="submit"
-          disabled={buttonSubmitState.disabled}
-        >
-          {buttonSubmitState.isSaving ? btnTitleSaving : btnTitle}
-        </button>
-      </form>
-
+      </Form>
+      
       <p className="auth__text">
         Уже зарегистрированы?
         <Link className="auth__link" to="/sign-in">

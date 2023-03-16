@@ -38,17 +38,19 @@ export const popupConfig = {
 
 export const authConfig = {
   login: {
-    name: 'login',
+    name: 'auth',
     title: 'Вход',
     btnTitleSaving: 'Войти...',
     btnTitle: 'Войти',
+    btnUnlocker: true,
   },
 
   register: {
-    name: 'register',
+    name: 'auth',
     title: 'Регистрация',
     btnTitleSaving: 'Зарегистрироваться...',
     btnTitle: 'Зарегистрироваться',
+    btnUnlocker: true,
   },
 };
 

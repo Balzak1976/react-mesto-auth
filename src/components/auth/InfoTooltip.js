@@ -1,5 +1,5 @@
 import React from 'react';
-import Popup from '../popups/Popup';
+import Popup from '../parts/Popup';
 
 function InfoTooltip({ infoConfig: {name, success, fail }, info, isOpen, onClose }) {
   return (

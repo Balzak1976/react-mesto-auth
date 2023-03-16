@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import Form from '../parts/Form';
 
 function Login({
-  authConfig: { formName, title, btnTitleSaving, btnTitle },
+  authConfig,
   onValidity,
   buttonSubmitState,
   inputErrors,
@@ -34,14 +35,12 @@ function Login({
 
   return (
     <section className="auth">
-      <h2 className="auth__title">{title}</h2>
+      <h2 className="auth__title">{authConfig.title}</h2>
 
-      <form
-        className={`form form_type_auth`}
-        name={formName}
-        onSubmit={onSubmit}
-        onChange={onValidity}
-        noValidate
+      <Form formConfig={authConfig}
+            onSubmit={onSubmit}
+            buttonSubmitState={buttonSubmitState}
+            onValidity={onValidity}
       >
         <fieldset className="form__container">
           <label className="form__field">
@@ -84,17 +83,9 @@ function Login({
           </label>
         </fieldset>
 
-        <button
-          className={`form__submit form__submit_type_auth ${
-            buttonSubmitState.disabled && 'form__submit_inactive'
-          }`}
-          name="submit"
-          type="submit"
-          disabled={buttonSubmitState.disabled}
-        >
-          {buttonSubmitState.isSaving ? btnTitleSaving : btnTitle}
-        </button>
-      </form>
+      </Form>
+
+      
     </section>
   );
 }
