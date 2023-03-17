@@ -41,8 +41,7 @@ function App() {
   const handleRegister = ({ email, password }) => {
     setBtnSubmitSaving(true);
 
-    auth
-      .register(email, password)
+    auth.register(email, password)
       .then(() => {
         navigate('/sign-in', { replace: true });
         setInfoToolTip({ isSuccess: true });
@@ -60,8 +59,7 @@ function App() {
   const handleLogin = ({ email, password }) => {
     setBtnSubmitSaving(true);
 
-    return auth
-      .authorize(email, password)
+    return auth.authorize(email, password)
       .then((data) => {
         if (data?.token) {
           localStorage.setItem('jwt', data.token);
@@ -78,8 +76,7 @@ function App() {
   };
 
   const handleTokenCheck = (jwt) => {
-    auth
-      .checkToken(jwt)
+    auth.checkToken(jwt)
       .then(({ data }) => {
         if (data) {
           setEmail({ email: data.email });
@@ -120,8 +117,8 @@ function App() {
 
   const handleUpdateAvatar = ({ avatar }) => {
     setBtnSubmitSaving(true);
-    api
-      .setUserAvatar({ avatar })
+
+    api.setUserAvatar({ avatar })
       .then((res) => {
         setCurrentUser(res);
 
@@ -137,8 +134,8 @@ function App() {
 
   const handleUpdateUser = ({ name, about }) => {
     setBtnSubmitSaving(true);
-    api
-      .setUserInfo({ name, about })
+
+    api.setUserInfo({ name, about })
       .then((res) => {
         setCurrentUser(res);
 
@@ -154,8 +151,8 @@ function App() {
 
   const handleAddPlaceSubmit = ({ name, link }) => {
     setBtnSubmitSaving(true);
-    api
-      .addPlace({ name, link })
+
+    api.addPlace({ name, link })
       .then((newCard) => {
         setCards([newCard, ...cards]);
 
@@ -171,8 +168,8 @@ function App() {
 
   const handleCardDelete = ({ cardId }) => {
     setBtnSubmitSaving(true);
-    api
-      .deleteCard(cardId)
+
+    api.deleteCard(cardId)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== cardId));
 
@@ -189,8 +186,7 @@ function App() {
   // ============================ CARDS =======================================
 
   const handleCardLike = ({ cardId, isLiked }) => {
-    api
-      .changeLikeCardStatus(cardId, isLiked)
+    api.changeLikeCardStatus(cardId, isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => (c._id === cardId ? newCard : c)));
       })
@@ -203,11 +199,11 @@ function App() {
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
+
     if (jwt) {
       handleTokenCheck(jwt);
 
-      api
-        .createQueueFetch()
+      api.createQueueFetch()
         .then(([dataUser, dataCards]) => {
           setCurrentUser(dataUser);
           setCards(dataCards);
@@ -218,18 +214,19 @@ function App() {
     }
   }, [loggedIn]);
 
- 
-
   // ===========================================================================
+
   return (
     <div className="root-app">
       <div className="page">
         <CurrentUserContext.Provider value={currentUser}>
+          
           <Header
             loggedIn={loggedIn}
             userData={email}
             onSignOut={handleSignOut}
           />
+
           <div className="wrapper">
             <Routes>
               <Route
@@ -270,6 +267,7 @@ function App() {
               />
             </Routes>
           </div>
+          
           <Footer />
           
             <EditAvatarPopup
