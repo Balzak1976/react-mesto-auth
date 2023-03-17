@@ -1,15 +1,18 @@
 import React from 'react';
 
 function Form({
-  config: { name, btnTitleSaving, btnTitle, btnUnlocker },
+  config: { name, btnTitleSaving, btnTitle },
   onSubmit,
   onValidity,
   buttonSubmitState,
   isButtonSubmitLock,
   children,
 }) {
+  console.log('isButtonSubmitLock,: ', isButtonSubmitLock);
+
   return (
-    <form className={`form form_type_${name}`}
+    <form
+      className={`form form_type_${name}`}
       name={name}
       onSubmit={onSubmit}
       onChange={onValidity}
@@ -17,12 +20,13 @@ function Form({
     >
       {children}
 
-      <button className={`form__submit form__submit_type_${name}
-        ${btnUnlocker && isButtonSubmitLock && 'form__submit_inactive'}
+      <button
+        className={`form__submit form__submit_type_${name}
+        ${isButtonSubmitLock && 'form__submit_inactive'}
       `}
         name="submit"
         type="submit"
-        disabled={btnUnlocker && isButtonSubmitLock}
+        disabled={isButtonSubmitLock}
       >
         {buttonSubmitState.isSaving ? btnTitleSaving : btnTitle}
       </button>

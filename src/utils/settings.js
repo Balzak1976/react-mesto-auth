@@ -4,7 +4,7 @@ export const popupConfig = {
     title: 'Обновить аватар',
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
-    btnUnlocker: true,
+
     inputs: [
       {
         id: 1,
@@ -23,7 +23,7 @@ export const popupConfig = {
     title: 'Редактировать профиль',
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
-    btnUnlocker: true,
+
     inputs: [
       {
         id: 1,
@@ -52,7 +52,7 @@ export const popupConfig = {
     title: 'Новое место',
     btnTitleSaving: 'Сохранить...',
     btnTitle: 'Сохранить',
-    btnUnlocker: true,
+
     inputs: [
       {
         id: 1,
@@ -81,7 +81,6 @@ export const popupConfig = {
     title: 'Вы уверены?',
     btnTitleSaving: 'Да...',
     btnTitle: 'Да',
-    btnUnlocker: false,
   },
 
   image: {
@@ -95,7 +94,7 @@ export const authConfig = {
     title: 'Вход',
     btnTitleSaving: 'Войти...',
     btnTitle: 'Войти',
-    btnUnlocker: true,
+
     inputs: [
       {
         id: 1,
@@ -122,7 +121,7 @@ export const authConfig = {
     title: 'Регистрация',
     btnTitleSaving: 'Зарегистрироваться...',
     btnTitle: 'Зарегистрироваться',
-    btnUnlocker: true,
+
     inputs: [
       {
         id: 1,
