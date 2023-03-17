@@ -313,9 +313,7 @@ function App() {
               isOpen={isEditProfilePopupOpen}
               onClose={closeAllPopups}
               onUpdateUser={handleUpdateUser}
-              onValidity={enableValidation}
               buttonSubmitState={btnSubmitState}
-              inputErrors={validationErrors}
             />
 
             <AddPlacePopup

@@ -8,6 +8,7 @@ function PopupWithForm({
   onClose,
   onSubmit,
   buttonSubmitState,
+  isButtonSubmitLock,
   onValidity,
   children,
 }) {
@@ -15,13 +16,14 @@ function PopupWithForm({
     <Popup isOpen={isOpen} onClose={onClose} name={popupConfig.name}>
       <h2 className="popup__title">{popupConfig.title}</h2>
 
-      <Form formConfig={popupConfig}
-            onSubmit={onSubmit}
-            buttonSubmitState={buttonSubmitState}
-            onValidity={onValidity}
+      <Form
+        formConfig={popupConfig}
+        onSubmit={onSubmit}
+        buttonSubmitState={buttonSubmitState}
+        isButtonSubmitLock={isButtonSubmitLock}
+        onValidity={onValidity}
       >
         {children}
-
       </Form>
     </Popup>
   );

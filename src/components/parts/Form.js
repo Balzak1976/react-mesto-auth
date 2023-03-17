@@ -5,6 +5,7 @@ function Form({
   onSubmit,
   onValidity,
   buttonSubmitState,
+  isButtonSubmitLock,
   children,
 }) {
   return (
@@ -17,11 +18,11 @@ function Form({
       {children}
 
       <button className={`form__submit form__submit_type_${name}
-        ${btnUnlocker && buttonSubmitState.disabled && 'form__submit_inactive'}
+        ${btnUnlocker && isButtonSubmitLock && 'form__submit_inactive'}
       `}
         name="submit"
         type="submit"
-        disabled={btnUnlocker && buttonSubmitState.disabled}
+        disabled={btnUnlocker && isButtonSubmitLock}
       >
         {buttonSubmitState.isSaving ? btnTitleSaving : btnTitle}
       </button>
