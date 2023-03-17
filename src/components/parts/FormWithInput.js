@@ -5,7 +5,7 @@ import Input from './Input';
 function FormWithInput({ config, onSubmit, buttonSubmitState }) {
   const validation = useContext(ValidationContext);
 
-  const [values, handleChange, errors, isValid] = validation;
+  const [isValid, values, handleChange, errors] = validation;
 
   return (
     <form

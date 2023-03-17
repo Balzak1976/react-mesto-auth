@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
-import PopupWithForm from './PopupWithForm';
-import Input from '../parts/Input';
+import { ValidationContext } from '../../contexts/ValidationContext';
+import PopupWithForm from '../parts/PopupWithForm';
 
 function EditAvatarPopup({
   config,
@@ -24,26 +24,15 @@ function EditAvatarPopup({
   }, [isOpen]);
 
   return (
-    <PopupWithForm
-      config={config}
-      isOpen={isOpen}
-      onClose={onClose}
-      onSubmit={handleSubmit}
-      buttonSubmitState={buttonSubmitState}
-      isButtonSubmitLock={!isValid}
-    >
-      <fieldset className="form__container">
-        {config.inputs.map(({ id, ...input }) => (
-          <Input
-            key={id}
-            config={input}
-            value={values[input.name]}
-            onChange={handleChange}
-            inputError={errors[input.name]}
-          />
-        ))}
-      </fieldset>
-    </PopupWithForm>
+    <ValidationContext.Provider value={[isValid, values, handleChange, errors]}>
+      <PopupWithForm
+        config={config}
+        isOpen={isOpen}
+        onClose={onClose}
+        onSubmit={handleSubmit}
+        buttonSubmitState={buttonSubmitState}
+      />
+    </ValidationContext.Provider>
   );
 }
 

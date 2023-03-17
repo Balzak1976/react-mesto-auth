@@ -24,16 +24,14 @@ function Login({ config, buttonSubmitState, onLogin }) {
       <h2 className="auth__title">{config.title}</h2>
 
       <ValidationContext.Provider
-        value={[values, handleChange, errors, isValid]}
+        value={[isValid, values, handleChange, errors]}
       >
         <FormWithInput
           config={config}
           onSubmit={onSubmit}
           buttonSubmitState={buttonSubmitState}
-          isButtonSubmitLock={isValid}
         />
       </ValidationContext.Provider>
-
     </section>
   );
 }

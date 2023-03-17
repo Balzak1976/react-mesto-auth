@@ -1,6 +1,6 @@
 import React from 'react';
-import Form from '../parts/Form';
-import Popup from '../parts/Popup';
+import Popup from './Popup';
+import FormWithInput from '../parts/FormWithInput';
 
 function PopupWithForm({
   config,
@@ -8,21 +8,16 @@ function PopupWithForm({
   onClose,
   onSubmit,
   buttonSubmitState,
-  isButtonSubmitLock,
-  children,
 }) {
   return (
     <Popup isOpen={isOpen} onClose={onClose} name={config.name}>
       <h2 className="popup__title">{config.title}</h2>
 
-      <Form
+      <FormWithInput
         config={config}
         onSubmit={onSubmit}
         buttonSubmitState={buttonSubmitState}
-        isButtonSubmitLock={isButtonSubmitLock}
-      >
-        {children}
-      </Form>
+      />
     </Popup>
   );
 }

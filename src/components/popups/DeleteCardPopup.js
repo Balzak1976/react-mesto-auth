@@ -1,5 +1,6 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
+import { ValidationContext } from '../../contexts/ValidationContext';
+import PopupWithForm from '../parts/PopupWithForm';
 
 function DeleteCardPopup({
   config,
@@ -8,20 +9,23 @@ function DeleteCardPopup({
   buttonSubmitState,
   onCardDelete,
 }) {
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     onCardDelete(cardId);
   };
+  // разблокировка кнопки удаления
+  const isValid = true;
 
   return (
-    <PopupWithForm
-      config={config}
-      isOpen={isOpen}
-      onClose={onClose}
-      onSubmit={handleSubmit}
-      buttonSubmitState={buttonSubmitState}
-      isButtonSubmitLock={false}
-    />
+    <ValidationContext.Provider value={[isValid]}>
+      <PopupWithForm
+        config={config}
+        isOpen={isOpen}
+        onClose={onClose}
+        onSubmit={handleSubmit}
+        buttonSubmitState={buttonSubmitState}
+      />
+    </ValidationContext.Provider>
   );
 }
 
