@@ -9,7 +9,6 @@ function PopupWithForm({
   onSubmit,
   buttonSubmitState,
   isButtonSubmitLock,
-  onValidity,
   children,
 }) {
   return (
@@ -21,7 +20,6 @@ function PopupWithForm({
         onSubmit={onSubmit}
         buttonSubmitState={buttonSubmitState}
         isButtonSubmitLock={isButtonSubmitLock}
-        onValidity={onValidity}
       >
         {children}
       </Form>

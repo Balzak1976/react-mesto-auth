@@ -303,9 +303,7 @@ function App() {
               isOpen={isEditAvatarPopupOpen}
               onClose={closeAllPopups}
               onUpdateAvatar={handleUpdateAvatar}
-              onValidity={enableValidation}
               buttonSubmitState={btnSubmitState}
-              inputErrors={validationErrors}
             />
 
             <EditProfilePopup
@@ -321,9 +319,7 @@ function App() {
               isOpen={isAddPlacePopupOpen}
               onClose={closeAllPopups}
               onAddPlace={handleAddPlaceSubmit}
-              onValidity={enableValidation}
               buttonSubmitState={btnSubmitState}
-              inputErrors={validationErrors}
             />
 
             <DeleteCardPopup

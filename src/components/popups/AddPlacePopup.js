@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useForm from '../../hooks/useForm';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import PopupWithForm from './PopupWithForm';
 import Input from '../parts/Input';
 
@@ -8,11 +8,10 @@ function AddPlacePopup({
   isOpen,
   onClose,
   onAddPlace,
-  onValidity,
   buttonSubmitState,
-  inputErrors,
 }) {
-  const { values, handleChange, setValues } = useForm({});
+  const { values, handleChange, errors, isValid, setValues, resetForm } =
+    useFormAndValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +19,7 @@ function AddPlacePopup({
   };
 
   useEffect(() => {
+    resetForm();
     setValues({ name: '', link: '' });
   }, [isOpen]);
 
@@ -30,7 +30,7 @@ function AddPlacePopup({
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonSubmitState={buttonSubmitState}
-      onValidity={onValidity}
+      isButtonSubmitLock={!isValid}
     >
       <fieldset className="form__container">
         {popupConfig.inputs.map(({ id, ...input }) => (
@@ -39,7 +39,7 @@ function AddPlacePopup({
             inputConfig={input}
             value={values[input.name]}
             onChange={handleChange}
-            inputError={inputErrors[input.name]}
+            inputError={errors[input.name]}
           />
         ))}
       </fieldset>

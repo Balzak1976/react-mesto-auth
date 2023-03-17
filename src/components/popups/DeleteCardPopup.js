@@ -20,6 +20,7 @@ function DeleteCardPopup({
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonSubmitState={buttonSubmitState}
+      isButtonSubmitLock={false}
     />
   );
 }
