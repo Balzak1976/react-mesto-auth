@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
-import Form from '../parts/Form';
-import Input from '../parts/Input';
+import { ValidationContext } from '../../contexts/ValidationContext';
+import FormWithInput from '../parts/FormWithInput';
 
 function Login({ config, buttonSubmitState, onLogin }) {
   const { values, handleChange, errors, isValid, setValues } =
@@ -23,24 +23,17 @@ function Login({ config, buttonSubmitState, onLogin }) {
     <section className="auth">
       <h2 className="auth__title">{config.title}</h2>
 
-      <Form
-        config={config}
-        onSubmit={onSubmit}
-        buttonSubmitState={buttonSubmitState}
-        isButtonSubmitLock={!isValid}
+      <ValidationContext.Provider
+        value={[values, handleChange, errors, isValid]}
       >
-        <fieldset className="form__container">
-          {config.inputs.map(({ id, ...input }) => (
-            <Input
-              key={id}
-              config={input}
-              value={values[input.name]}
-              onChange={handleChange}
-              inputError={errors[input.name]}
-            />
-          ))}
-        </fieldset>
-      </Form>
+        <FormWithInput
+          config={config}
+          onSubmit={onSubmit}
+          buttonSubmitState={buttonSubmitState}
+          isButtonSubmitLock={!isValid}
+        />
+      </ValidationContext.Provider>
+      
     </section>
   );
 }
