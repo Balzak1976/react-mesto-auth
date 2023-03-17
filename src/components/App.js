@@ -255,7 +255,7 @@ function App() {
                 path="/sign-in"
                 element={
                   <Login
-                    authConfig={authConfig.login}
+                    config={authConfig.login}
                     buttonSubmitState={btnSubmitState}
                     onLogin={handleLogin}
                   />
@@ -265,7 +265,7 @@ function App() {
                 path="/sign-up"
                 element={
                   <Register
-                    authConfig={authConfig.register}
+                    config={authConfig.register}
                     buttonSubmitState={btnSubmitState}
                     onRegister={handleRegister}
                   />
@@ -276,7 +276,7 @@ function App() {
           <Footer />
           
             <EditAvatarPopup
-              popupConfig={popupConfig.avatar}
+              config={popupConfig.avatar}
               isOpen={isEditAvatarPopupOpen}
               onClose={closeAllPopups}
               onUpdateAvatar={handleUpdateAvatar}
@@ -284,7 +284,7 @@ function App() {
             />
 
             <EditProfilePopup
-              popupConfig={popupConfig.profile}
+              config={popupConfig.profile}
               isOpen={isEditProfilePopupOpen}
               onClose={closeAllPopups}
               onUpdateUser={handleUpdateUser}
@@ -292,7 +292,7 @@ function App() {
             />
 
             <AddPlacePopup
-              popupConfig={popupConfig.card}
+              config={popupConfig.card}
               isOpen={isAddPlacePopupOpen}
               onClose={closeAllPopups}
               onAddPlace={handleAddPlaceSubmit}
@@ -300,7 +300,7 @@ function App() {
             />
 
             <DeleteCardPopup
-              popupConfig={popupConfig.delCard}
+              config={popupConfig.delCard}
               isOpen={isDelCardPopupOpen}
               onClose={closeAllPopups}
               onCardDelete={handleCardDelete}
@@ -308,14 +308,14 @@ function App() {
             />
 
             <ImagePopup
-              popupConfig={popupConfig.image}
+              config={popupConfig.image}
               card={selectedCard}
               isOpen={isImagePopupOpen}
               onClose={closeAllPopups}
             />
 
             <InfoTooltip
-              infoConfig={infoConfig}
+              config={infoConfig}
               info={infoToolTip}
               isOpen={isInfoToolTipOpen}
               onClose={closeAllPopups}

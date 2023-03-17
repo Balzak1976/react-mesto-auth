@@ -1,7 +1,7 @@
 import React from 'react';
 import Popup from '../parts/Popup';
 
-function ImagePopup({ popupConfig: { name }, card: { cardLink, cardTitle }, isOpen, onClose }) {
+function ImagePopup({ config: { name }, card: { cardLink, cardTitle }, isOpen, onClose }) {
   return (
     <Popup isOpen={isOpen} onClose={onClose} name={name}>
       <figure className="zoom-picture">

@@ -4,7 +4,7 @@ import PopupWithForm from './PopupWithForm';
 import Input from '../parts/Input';
 
 function AddPlacePopup({
-  popupConfig,
+  config,
   isOpen,
   onClose,
   onAddPlace,
@@ -25,7 +25,7 @@ function AddPlacePopup({
 
   return (
     <PopupWithForm
-      popupConfig={popupConfig}
+      config={config}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
@@ -33,10 +33,10 @@ function AddPlacePopup({
       isButtonSubmitLock={!isValid}
     >
       <fieldset className="form__container">
-        {popupConfig.inputs.map(({ id, ...input }) => (
+        {config.inputs.map(({ id, ...input }) => (
           <Input
             key={id}
-            inputConfig={input}
+            config={input}
             value={values[input.name]}
             onChange={handleChange}
             inputError={errors[input.name]}

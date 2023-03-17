@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Input({
-  inputConfig: {type, name, placeholder, typeAttribute, minLength, maxLength },
+  config: {type, name, placeholder, typeAttribute, minLength, maxLength },
   value,
   onChange,
   inputError

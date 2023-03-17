@@ -3,7 +3,7 @@ import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import Form from '../parts/Form';
 import Input from '../parts/Input';
 
-function Login({ authConfig, buttonSubmitState, onLogin }) {
+function Login({ config, buttonSubmitState, onLogin }) {
   const { values, handleChange, errors, isValid, setValues } =
     useFormAndValidation();
 
@@ -21,19 +21,19 @@ function Login({ authConfig, buttonSubmitState, onLogin }) {
 
   return (
     <section className="auth">
-      <h2 className="auth__title">{authConfig.title}</h2>
+      <h2 className="auth__title">{config.title}</h2>
 
       <Form
-        formConfig={authConfig}
+        config={config}
         onSubmit={onSubmit}
         buttonSubmitState={buttonSubmitState}
         isButtonSubmitLock={!isValid}
       >
         <fieldset className="form__container">
-          {authConfig.inputs.map(({ id, ...input }) => (
+          {config.inputs.map(({ id, ...input }) => (
             <Input
               key={id}
-              inputConfig={input}
+              config={input}
               value={values[input.name]}
               onChange={handleChange}
               inputError={errors[input.name]}

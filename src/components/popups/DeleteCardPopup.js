@@ -2,7 +2,7 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function DeleteCardPopup({
-  popupConfig,
+  config,
   isOpen: { isOpen, cardId },
   onClose,
   buttonSubmitState,
@@ -15,7 +15,7 @@ function DeleteCardPopup({
 
   return (
     <PopupWithForm
-      popupConfig={popupConfig}
+      config={config}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}

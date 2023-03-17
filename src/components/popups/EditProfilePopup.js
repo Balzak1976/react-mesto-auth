@@ -5,7 +5,7 @@ import PopupWithForm from './PopupWithForm';
 import Input from '../parts/Input';
 
 function EditProfilePopup({
-  popupConfig,
+  config,
   isOpen,
   onClose,
   onUpdateUser,
@@ -28,7 +28,7 @@ function EditProfilePopup({
 
   return (
     <PopupWithForm
-      popupConfig={popupConfig}
+      config={config}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
@@ -36,10 +36,10 @@ function EditProfilePopup({
       isButtonSubmitLock={!isValid}
     >
       <fieldset className="form__container">
-        {popupConfig.inputs.map(({ id, ...input }) => (
+        {config.inputs.map(({ id, ...input }) => (
           <Input
             key={id}
-            inputConfig={input}
+            config={input}
             value={values[input.name]}
             onChange={handleChange}
             inputError={errors[input.name]}

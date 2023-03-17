@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Form({
-  formConfig: { name, btnTitleSaving, btnTitle, btnUnlocker },
+  config: { name, btnTitleSaving, btnTitle, btnUnlocker },
   onSubmit,
   onValidity,
   buttonSubmitState,

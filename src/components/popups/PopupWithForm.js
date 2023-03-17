@@ -3,7 +3,7 @@ import Form from '../parts/Form';
 import Popup from '../parts/Popup';
 
 function PopupWithForm({
-  popupConfig,
+  config,
   isOpen,
   onClose,
   onSubmit,
@@ -12,11 +12,11 @@ function PopupWithForm({
   children,
 }) {
   return (
-    <Popup isOpen={isOpen} onClose={onClose} name={popupConfig.name}>
-      <h2 className="popup__title">{popupConfig.title}</h2>
+    <Popup isOpen={isOpen} onClose={onClose} name={config.name}>
+      <h2 className="popup__title">{config.title}</h2>
 
       <Form
-        formConfig={popupConfig}
+        config={config}
         onSubmit={onSubmit}
         buttonSubmitState={buttonSubmitState}
         isButtonSubmitLock={isButtonSubmitLock}
