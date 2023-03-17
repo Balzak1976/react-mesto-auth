@@ -1,17 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useForm from '../../hooks/useForm';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import Form from '../parts/Form';
 import Input from '../parts/Input';
 
 function Register({
   authConfig,
-  onValidity,
   buttonSubmitState,
-  inputErrors,
   onRegister,
 }) {
-  const { values, handleChange } = useForm({});
+  const { values, handleChange, errors, isValid } =
+    useFormAndValidation();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +26,7 @@ function Register({
         formConfig={authConfig}
         onSubmit={onSubmit}
         buttonSubmitState={buttonSubmitState}
-        onValidity={onValidity}
+        isButtonSubmitLock={!isValid}
       >
         <fieldset className="form__container">
           {authConfig.inputs.map(({ id, ...input }) => (
@@ -36,7 +35,7 @@ function Register({
               inputConfig={input}
               value={values[input.name]}
               onChange={handleChange}
-              inputError={inputErrors[input.name]}
+              inputError={errors[input.name]}
             />
           ))}
         </fieldset>

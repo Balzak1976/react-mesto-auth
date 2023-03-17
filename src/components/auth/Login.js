@@ -1,16 +1,11 @@
 import React from 'react';
-import useForm from '../../hooks/useForm';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import Form from '../parts/Form';
 import Input from '../parts/Input';
 
-function Login({
-  authConfig,
-  onValidity,
-  buttonSubmitState,
-  inputErrors,
-  onLogin,
-}) {
-  const { values, handleChange, setValues } = useForm({});
+function Login({ authConfig, buttonSubmitState, onLogin }) {
+  const { values, handleChange, errors, isValid, setValues } =
+    useFormAndValidation();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -32,7 +27,7 @@ function Login({
         formConfig={authConfig}
         onSubmit={onSubmit}
         buttonSubmitState={buttonSubmitState}
-        onValidity={onValidity}
+        isButtonSubmitLock={!isValid}
       >
         <fieldset className="form__container">
           {authConfig.inputs.map(({ id, ...input }) => (
@@ -41,7 +36,7 @@ function Login({
               inputConfig={input}
               value={values[input.name]}
               onChange={handleChange}
-              inputError={inputErrors[input.name]}
+              inputError={errors[input.name]}
             />
           ))}
         </fieldset>

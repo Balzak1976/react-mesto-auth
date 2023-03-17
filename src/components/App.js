@@ -32,7 +32,6 @@ function App() {
     isSaving: false,
     disabled: true,
   });
-  const [validationErrors, setValidationErrors] = useState({});
   const [isInfoToolTipOpen, setInfoToolTipOpen] = useState(false);
   const [infoToolTip, setInfoToolTip] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
@@ -222,25 +221,7 @@ function App() {
     }
   }, [loggedIn]);
 
-  // ================================ VALIDATION ===============================
-
-  const enableValidation = (e) => {
-    if (!e.currentTarget.checkValidity()) {
-      setValidationErrors({
-        ...validationErrors,
-        [e.target.name]: e.target.validationMessage,
-      });
-      setBtnSubmitState((s) => ({ ...s, disabled: true }));
-    } else {
-      setValidationErrors({});
-      setBtnSubmitState((s) => ({ ...s, disabled: false }));
-    }
-  };
-
-  useEffect(() => {
-    setValidationErrors({});
-    setBtnSubmitState((s) => ({ ...s, disabled: true }));
-  }, [isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpen]);
+ 
 
   // ===========================================================================
   return (
@@ -275,9 +256,7 @@ function App() {
                 element={
                   <Login
                     authConfig={authConfig.login}
-                    onValidity={enableValidation}
                     buttonSubmitState={btnSubmitState}
-                    inputErrors={validationErrors}
                     onLogin={handleLogin}
                   />
                 }
@@ -287,9 +266,7 @@ function App() {
                 element={
                   <Register
                     authConfig={authConfig.register}
-                    onValidity={enableValidation}
                     buttonSubmitState={btnSubmitState}
-                    inputErrors={validationErrors}
                     onRegister={handleRegister}
                   />
                 }
