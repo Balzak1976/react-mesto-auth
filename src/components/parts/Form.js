@@ -8,8 +8,6 @@ function Form({
   isButtonSubmitLock,
   children,
 }) {
-  console.log('isButtonSubmitLock,: ', isButtonSubmitLock);
-
   return (
     <form
       className={`form form_type_${name}`}
@@ -28,7 +26,7 @@ function Form({
         type="submit"
         disabled={isButtonSubmitLock}
       >
-        {buttonSubmitState.isSaving ? btnTitleSaving : btnTitle}
+        {buttonSubmitState ? btnTitleSaving : btnTitle}
       </button>
     </form>
   );

@@ -28,10 +28,7 @@ function App() {
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [btnSubmitState, setBtnSubmitState] = useState({
-    isSaving: false,
-    disabled: true,
-  });
+  const [isBtnSubmitSaving, setBtnSubmitSaving] = useState(false);
   const [isInfoToolTipOpen, setInfoToolTipOpen] = useState(false);
   const [infoToolTip, setInfoToolTip] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
@@ -42,7 +39,7 @@ function App() {
   const navigate = useNavigate();
 
   const handleRegister = ({ email, password }) => {
-    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
+    setBtnSubmitSaving(true);
 
     auth
       .register(email, password)
@@ -55,13 +52,13 @@ function App() {
         setInfoToolTip({ isSuccess: false });
       })
       .finally(() => {
-        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
+        setBtnSubmitSaving(false);
         setInfoToolTipOpen(true);
       });
   };
 
   const handleLogin = ({ email, password }) => {
-    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
+    setBtnSubmitSaving(true);
 
     return auth
       .authorize(email, password)
@@ -76,7 +73,7 @@ function App() {
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
+        setBtnSubmitSaving(false);
       });
   };
 
@@ -122,7 +119,7 @@ function App() {
   };
 
   const handleUpdateAvatar = ({ avatar }) => {
-    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
+    setBtnSubmitSaving(true);
     api
       .setUserAvatar({ avatar })
       .then((res) => {
@@ -134,12 +131,12 @@ function App() {
         console.log(err);
       })
       .finally(() => {
-        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
+        setBtnSubmitSaving(false);
       });
   };
 
   const handleUpdateUser = ({ name, about }) => {
-    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
+    setBtnSubmitSaving(true);
     api
       .setUserInfo({ name, about })
       .then((res) => {
@@ -151,12 +148,12 @@ function App() {
         console.log(err);
       })
       .finally(() => {
-        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
+        setBtnSubmitSaving(false);
       });
   };
 
   const handleAddPlaceSubmit = ({ name, link }) => {
-    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
+    setBtnSubmitSaving(true);
     api
       .addPlace({ name, link })
       .then((newCard) => {
@@ -168,12 +165,12 @@ function App() {
         console.log(err);
       })
       .finally(() => {
-        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
+        setBtnSubmitSaving(false);
       });
   };
 
   const handleCardDelete = ({ cardId }) => {
-    setBtnSubmitState((s) => ({ ...s, isSaving: true }));
+    setBtnSubmitSaving(true);
     api
       .deleteCard(cardId)
       .then(() => {
@@ -185,7 +182,7 @@ function App() {
         console.log(err);
       })
       .finally(() => {
-        setBtnSubmitState((s) => ({ ...s, isSaving: false }));
+        setBtnSubmitSaving(false);
       });
   };
 
@@ -256,7 +253,7 @@ function App() {
                 element={
                   <Login
                     config={authConfig.login}
-                    buttonSubmitState={btnSubmitState}
+                    buttonSubmitState={isBtnSubmitSaving}
                     onLogin={handleLogin}
                   />
                 }
@@ -266,7 +263,7 @@ function App() {
                 element={
                   <Register
                     config={authConfig.register}
-                    buttonSubmitState={btnSubmitState}
+                    buttonSubmitState={isBtnSubmitSaving}
                     onRegister={handleRegister}
                   />
                 }
@@ -280,7 +277,7 @@ function App() {
               isOpen={isEditAvatarPopupOpen}
               onClose={closeAllPopups}
               onUpdateAvatar={handleUpdateAvatar}
-              buttonSubmitState={btnSubmitState}
+              buttonSubmitState={isBtnSubmitSaving}
             />
 
             <EditProfilePopup
@@ -288,7 +285,7 @@ function App() {
               isOpen={isEditProfilePopupOpen}
               onClose={closeAllPopups}
               onUpdateUser={handleUpdateUser}
-              buttonSubmitState={btnSubmitState}
+              buttonSubmitState={isBtnSubmitSaving}
             />
 
             <AddPlacePopup
@@ -296,7 +293,7 @@ function App() {
               isOpen={isAddPlacePopupOpen}
               onClose={closeAllPopups}
               onAddPlace={handleAddPlaceSubmit}
-              buttonSubmitState={btnSubmitState}
+              buttonSubmitState={isBtnSubmitSaving}
             />
 
             <DeleteCardPopup
@@ -304,7 +301,7 @@ function App() {
               isOpen={isDelCardPopupOpen}
               onClose={closeAllPopups}
               onCardDelete={handleCardDelete}
-              buttonSubmitState={btnSubmitState}
+              buttonSubmitState={isBtnSubmitSaving}
             />
 
             <ImagePopup
