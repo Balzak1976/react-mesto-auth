@@ -1,16 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
-import Form from '../parts/Form';
-import Input from '../parts/Input';
+import { ValidationContext } from '../../contexts/ValidationContext';
+import FormWithInput from '../parts/FormWithInput';
 
-function Register({
-  config,
-  buttonSubmitState,
-  onRegister,
-}) {
-  const { values, handleChange, errors, isValid } =
-    useFormAndValidation();
+function Register({ config, buttonSubmitState, onRegister }) {
+  const { values, handleChange, errors, isValid } = useFormAndValidation();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -22,24 +17,16 @@ function Register({
     <section className="auth">
       <h2 className="auth__title">{config.title}</h2>
 
-      <Form
-        config={config}
-        onSubmit={onSubmit}
-        buttonSubmitState={buttonSubmitState}
-        isButtonSubmitLock={!isValid}
+      <ValidationContext.Provider
+        value={[values, handleChange, errors, isValid]}
       >
-        <fieldset className="form__container">
-          {config.inputs.map(({ id, ...input }) => (
-            <Input
-              key={id}
-              config={input}
-              value={values[input.name]}
-              onChange={handleChange}
-              inputError={errors[input.name]}
-            />
-          ))}
-        </fieldset>
-      </Form>
+        <FormWithInput
+          config={config}
+          onSubmit={onSubmit}
+          buttonSubmitState={buttonSubmitState}
+          isButtonSubmitLock={isValid}
+        />
+      </ValidationContext.Provider>
 
       <p className="auth__text">
         Уже зарегистрированы?

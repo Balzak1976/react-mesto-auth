@@ -30,10 +30,10 @@ function Login({ config, buttonSubmitState, onLogin }) {
           config={config}
           onSubmit={onSubmit}
           buttonSubmitState={buttonSubmitState}
-          isButtonSubmitLock={!isValid}
+          isButtonSubmitLock={isValid}
         />
       </ValidationContext.Provider>
-      
+
     </section>
   );
 }

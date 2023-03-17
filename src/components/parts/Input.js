@@ -1,10 +1,10 @@
 import React from 'react';
 
 function Input({
-  config: {type, name, placeholder, typeAttribute, minLength, maxLength },
+  config: { type, name, placeholder, typeAttribute, minLength, maxLength },
   value,
   onChange,
-  inputError
+  error,
 }) {
   return (
     <label className="form__field">
@@ -20,11 +20,9 @@ function Input({
         required
       />
       <span
-        className={`form__input-error ${
-          inputError && 'form__input-error_active'
-        }`}
+        className={`form__input-error ${error && 'form__input-error_active'}`}
       >
-        {inputError}
+        {error}
       </span>
     </label>
   );

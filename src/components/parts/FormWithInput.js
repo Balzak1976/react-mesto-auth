@@ -22,7 +22,7 @@ function FormWithInput({ config, onSubmit, buttonSubmitState }) {
               config={input}
               value={values[input.name]}
               onChange={handleChange}
-              inputError={errors[input.name]}
+              error={errors[input.name]}
             />
           ))}
         </fieldset>
