@@ -1,5 +1,6 @@
 @media screen and (max-width: 450px) {
   .header__menu_type_burger {
-    flex-direction: column-reverse;
+    min-height: 225px;
+    margin: 0;
   }
 }
