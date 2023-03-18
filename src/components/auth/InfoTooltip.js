@@ -1,7 +1,12 @@
 import React from 'react';
 import Popup from '../parts/Popup';
 
-function InfoTooltip({ config: {name, success, fail }, info, isOpen, onClose }) {
+function InfoTooltip({
+  config: { name, success, fail },
+  info,
+  isOpen,
+  onClose,
+}) {
   return (
     <Popup isOpen={isOpen} onClose={onClose} name={name}>
       <div className="info">
@@ -11,7 +16,7 @@ function InfoTooltip({ config: {name, success, fail }, info, isOpen, onClose }) 
           }`}
         ></div>
         <div className="info__text">
-          {info.isSuccess ? success.text : info?.fail || fail.text}
+          {info.isSuccess ? success.text : fail.text}
         </div>
       </div>
     </Popup>
