@@ -1,0 +1,31 @@
+@media screen and (max-width: 450px) {
+  .header__burger-inner {
+    display: block;
+    position: relative;
+    height: 3px;
+    width: 24px;
+    background-color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .header__burger-inner::before,
+  .header__burger-inner::after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 24px;
+    left: 0;
+    top: 50%;
+    background-color: #fff;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .header__burger-inner::before {
+    transform: translateY(calc(-50% - 9px));
+  }
+
+  .header__burger-inner::after {
+    transform: translateY(calc(-50% + 9px));
+  }
+}

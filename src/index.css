@@ -11,10 +11,10 @@
 @import url('./blocks/header/__panel/header__panel.css');
 @import url('./blocks/header/__panel/_type_burger/header__panel_type_burger.css');
 @import url('./blocks/header/__link/header__link.css');
-@import url('./blocks/header/__btn-burger/header__btn-burger.css');
-@import url('./blocks/header/__btn-burger/_is-close/header__btn-burger_is-close.css');
-@import url('./blocks/header/__btn-burger-line/header__btn-burger-line.css');
-@import url('./blocks/header/__btn-burger-line/_is-close/header__btn-burger-line_is-close.css');
+@import url('./blocks/header/__burger/header__burger.css');
+@import url('./blocks/header/__burger-inner/header__burger-inner.css');
+@import url('./blocks/header/__burger-inner/_active/header__burger-inner_active.css');
+
 /* logout */
 @import url('./blocks/logout/logout.css');
 @import url('./blocks/logout/_type_burger/logout_type_burger.css');

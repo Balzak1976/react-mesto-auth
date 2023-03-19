@@ -30,12 +30,18 @@ function Header({ loggedIn, userData, onSignOut }) {
             <img className="logo" src={logo} alt="логотип" />
           </Link>
           {loggedIn && (
-            <div className={`header__btn-burger ${isMenuOpen && 'header__btn-burger_is_close'}`}
+            <button
+              className="header__burger"
               onClick={handelBtnBurgerClick}
+              type="button"
+              aria-label="управление signout"
             >
-              <span className={`header__btn-burger-line ${isMenuOpen && 'header__btn-burger-line_is_close'}`}
+              <span
+                className={`header__burger-inner ${
+                  isMenuOpen && 'header__burger-inner_active'
+                }`}
               />
-            </div>
+            </button>
           )}
         </div>
         <Routes>

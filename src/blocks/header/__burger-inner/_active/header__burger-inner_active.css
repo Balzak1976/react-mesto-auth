@@ -1,0 +1,13 @@
+@media screen and (max-width: 450px) {
+  .header__burger-inner_active {
+    background: transparent;
+  }
+
+  .header__burger-inner_active::before {
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .header__burger-inner_active::after {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+}

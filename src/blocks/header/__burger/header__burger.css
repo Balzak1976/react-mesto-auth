@@ -1,0 +1,22 @@
+.header__burger {
+  height: 75px;
+  width: 24px;
+  padding:0;
+  display: none;
+  border: 0;
+  background-color: inherit;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.header__burger:hover {
+  cursor: pointer;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 450px) {
+  .header__burger {
+    display: flex;
+    align-items: center;  
+  }
+}
