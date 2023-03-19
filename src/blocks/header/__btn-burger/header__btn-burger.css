@@ -3,16 +3,13 @@
   width: 24px;
   box-sizing: border-box;
   position: relative;
-  border-top: 3px solid #fff;
-  border-bottom: 3px solid #fff;
-  position: relative;
-  transition: opacity .5s ease-in;
+  transition: opacity 0.5s ease-in;
   display: none;
 }
 
 .header__btn-burger:hover {
   cursor: pointer;
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .header__btn-burger::before {
@@ -21,8 +18,16 @@
   width: 100%;
   position: absolute;
   background: #fff;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+}
+
+.header__btn-burger::after {
+  content: '';
+  height: 3px;
+  width: 100%;
+  position: absolute;
+  background: #fff;
+  bottom: 0;
 }
 
 @media screen and (max-width: 450px) {

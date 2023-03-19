@@ -23,18 +23,19 @@ function Header({ loggedIn, userData, onSignOut }) {
         className={`header__menu ${isMenuOpen && 'header__menu_type_burger'}`}
       >
         <div
-          className={`header__panel ${
-            isMenuOpen && 'header__panel_type_burger'
-          }`}
+          className={`header__panel
+          ${isMenuOpen && 'header__panel_type_burger'}`}
         >
           <Link to="/">
             <img className="logo" src={logo} alt="логотип" />
           </Link>
           {loggedIn && (
-            <div
-              className={`header__btn-burger${isMenuOpen ? '_is_close' : ''}`}
+            <div className={`header__btn-burger ${isMenuOpen && 'header__btn-burger_is_close'}`}
               onClick={handelBtnBurgerClick}
-            />
+            >
+              <span className={`header__btn-burger-line ${isMenuOpen && 'header__btn-burger-line_is_close'}`}
+              />
+            </div>
           )}
         </div>
         <Routes>

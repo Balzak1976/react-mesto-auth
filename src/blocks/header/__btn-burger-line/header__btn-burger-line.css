@@ -1,0 +1,11 @@
+@media screen and (max-width: 450px) {
+  .header__btn-burger-line {
+    content: '';
+    height: 3px;
+    width: 100%;
+    position: absolute;
+    background: #fff;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
