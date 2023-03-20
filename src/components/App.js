@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { api } from '../utils/Api';
 import * as auth from '../utils/auth';
@@ -264,6 +264,10 @@ function App() {
                     onRegister={handleRegister}
                   />
                 }
+              />
+              <Route
+                path='*'
+                element={loggedIn ? <Navigate to={ROOT_URL} /> : <Navigate to={`${ROOT_URL}sign-in`} />}
               />
             </Routes>
           </div>
