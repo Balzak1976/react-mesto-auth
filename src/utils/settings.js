@@ -1,3 +1,5 @@
+export const ROOT_URL = '/react-mesto-auth/';
+
 export const popupConfig = {
   avatar: {
     name: 'avatar',

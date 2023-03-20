@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
+import { ROOT_URL } from '../utils/settings';
 import logo from '../images/logo.svg';
 import SignOut from './auth/SignOut';
 import ProtectedRouteElement from './parts/ProtectedRoute';
@@ -26,7 +27,7 @@ function Header({ loggedIn, userData, onSignOut }) {
           className={`header__panel
           ${isMenuOpen && 'header__panel_type_burger'}`}
         >
-          <Link to="/">
+          <Link to={ROOT_URL}>
             <img className="logo" src={logo} alt="логотип" />
           </Link>
           {loggedIn && (
@@ -34,7 +35,7 @@ function Header({ loggedIn, userData, onSignOut }) {
               className="header__burger"
               onClick={handelBtnBurgerClick}
               type="button"
-              aria-label="управление signout"
+              aria-label="управление панелью выхода"
             >
               <span
                 className={`header__burger-inner ${
@@ -46,7 +47,7 @@ function Header({ loggedIn, userData, onSignOut }) {
         </div>
         <Routes>
           <Route
-            path="/"
+            path={ROOT_URL}
             element={
               <ProtectedRouteElement
                 component={SignOut}
@@ -58,17 +59,17 @@ function Header({ loggedIn, userData, onSignOut }) {
             }
           />
           <Route
-            path="/sign-in"
+            path={`${ROOT_URL}sign-in`}
             element={
-              <Link to="/sign-up" className="header__link">
+              <Link to={`${ROOT_URL}sign-up`} className="header__link">
                 Регистрация
               </Link>
             }
           />
           <Route
-            path="/sign-up"
+            path={`${ROOT_URL}sign-up`}
             element={
-              <Link to="/sign-in" className="header__link">
+              <Link to={`${ROOT_URL}sign-in`} className="header__link">
                 Войти
               </Link>
             }

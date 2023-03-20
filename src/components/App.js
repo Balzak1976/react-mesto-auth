@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { api } from '../utils/Api';
 import * as auth from '../utils/auth';
-import { authConfig, infoConfig, popupConfig } from '../utils/settings';
+import { authConfig, infoConfig, popupConfig, ROOT_URL } from '../utils/settings';
 import InfoTooltip from './auth/InfoTooltip';
 import Login from './auth/Login';
 import Register from './auth/Register';
@@ -43,7 +43,7 @@ function App() {
 
     auth.register(email, password)
       .then(() => {
-        navigate('/sign-in', { replace: true });
+        navigate(`${ROOT_URL}sign-in`, { replace: true });
         setInfoToolTip({ isSuccess: true });
       })
       .catch((err) => {
@@ -64,7 +64,7 @@ function App() {
         if (data?.token) {
           localStorage.setItem('jwt', data.token);
           setLoggedIn(true);
-          navigate('/', { replace: true });
+          navigate(ROOT_URL, { replace: true });
           // очищаем форму в Login.js
           return data;
         }
@@ -81,7 +81,7 @@ function App() {
         if (data) {
           setEmail({ email: data.email });
           setLoggedIn(true);
-          navigate('/', { replace: true });
+          navigate(ROOT_URL, { replace: true });
         }
       })
       .catch((err) => console.log(err));
@@ -89,7 +89,7 @@ function App() {
 
   const handleSignOut = () => {
     localStorage.removeItem('jwt');
-    navigate('/sign-in', { replace: true });
+    navigate(`${ROOT_URL}sign-in`, { replace: true });
     setLoggedIn(false);
   };
 
@@ -230,7 +230,7 @@ function App() {
           <div className="wrapper">
             <Routes>
               <Route
-                path="/"
+                path={ROOT_URL}
                 element={
                   <ProtectedRouteElement
                     component={Main}
@@ -246,7 +246,7 @@ function App() {
                 }
               />
               <Route
-                path="/sign-in"
+                path={`${ROOT_URL}sign-in`}
                 element={
                   <Login
                     config={authConfig.login}
@@ -256,7 +256,7 @@ function App() {
                 }
               />
               <Route
-                path="/sign-up"
+                path={`${ROOT_URL}sign-up`}
                 element={
                   <Register
                     config={authConfig.register}
