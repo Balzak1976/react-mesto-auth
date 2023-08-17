@@ -33,7 +33,7 @@
 клонировать репозиторий 
 
 ```javascript
-git clone https://github.com/Balzak1976/react-mesto-auth
+git clone https://github.com/Balzak1976/react-mesto-auth.git
 ```
 
 установить зависимости
